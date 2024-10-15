@@ -1,12 +1,12 @@
-
-import './App.css'
+import IconButton from "./components/primatives/IconButton";
+import svg from "./assets/menu.svg"
 
 function App() {
-
   return (
-    <div className=''>
+    <>
+      <IconButton svg={svg}></IconButton>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
