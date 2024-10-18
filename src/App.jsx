@@ -1,10 +1,14 @@
-import IconButton from "./components/primatives/IconButton";
-import svg from "./assets/menu.svg"
+import SvgInstagram from "./assets/icons/Instagram";
+import Header from "./components/Header";
+import SocialIcon from "./components/primatives/SocialIcon";
 
 function App() {
   return (
     <>
-      <IconButton svg={svg}></IconButton>
+      <Header></Header>
+      <SocialIcon>
+        <SvgInstagram></SvgInstagram>
+      </SocialIcon>
     </>
   );
 }

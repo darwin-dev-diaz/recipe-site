@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 function IconButton(props) {
+  const clonedElement = React.cloneElement(props.children, {height: '40px', width: '40px', fill:'white'})
   return (
-    <button className="flex content-center bg-black p-4 text-white">
-      <img src={props.svg} alt={props.alt} />
+    <button className="flex content-center bg-[var(--black)] p-3 text-white">
+      {clonedElement}
     </button>
   );
 }
 
 IconButton.propTypes = {
-    svg: PropTypes.string,
-    alt: PropTypes.string,
+  children: PropTypes.node.isRequired,
 }
 
 export default IconButton;
