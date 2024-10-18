@@ -15,6 +15,9 @@ export default {
         "dark-orange": "#e65100",
         "very-dark-orange": "#7e2c00",
       },
+      spacing: {
+        128: "32rem",
+      },
     },
   },
   plugins: [],
