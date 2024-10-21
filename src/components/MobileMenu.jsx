@@ -46,7 +46,7 @@ function MobileMenu() {
             {favoritesOpen ? (
               <SvgRemove className="fill-orange"></SvgRemove>
             ) : (
-              <SvgAdd className="fill-orange"></SvgAdd>
+              <SvgAdd className="fill-orange" color="orange"></SvgAdd>
             )}
           </div>
         </ul>

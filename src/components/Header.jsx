@@ -8,7 +8,7 @@ import { useState } from "react";
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="z-40 sticky top-0 flex justify-between bg-[var(--black)]">
+    <header className="z-50 sticky top-0 flex justify-between bg-[var(--black)]">
       <IconButton
         aria-label="Menu"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

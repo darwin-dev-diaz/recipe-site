@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 function RecipeDisplayOne(props) {
   return (
     <div
-      className="relative h-80 w-full bg-orange bg-cover bg-center"
+      className="relative h-80 w-full cursor-pointer bg-orange bg-cover bg-center"
       style={{ backgroundImage: `url(${props.image})` }}
     >
       <div className="absolute bottom-10 left-10 flex flex-col gap-2">
