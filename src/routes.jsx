@@ -1,7 +1,7 @@
 import App from "./App.jsx";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import AllRecipesScreen from "./pages/AllRecipesScreen.jsx";
-
+import RecipeScreen from "./pages/RecipeScreen.jsx";
 
 const routes = [
   {
@@ -10,8 +10,8 @@ const routes = [
     children: [
       { index: true, element: <HomeScreen /> },
       { path: "allrecipes", element: <AllRecipesScreen /> },
-    //   { path: "store", element: <Store /> },
-    //   { path: "product/:item", element: <ProductPage /> },
+      { path: "recipe/:item", element: <RecipeScreen /> },
+      //   { path: "product/:item", element: <ProductPage /> },
     ],
   },
 ];
