@@ -12,7 +12,7 @@ function HomeScreen() {
         <div className="relative mb-8 mt-10 flex flex-col gap-4">
           <div className="absolute left-[50%] z-40 flex h-12 w-full max-w-96 translate-x-[-50%] translate-y-[-50%] items-center bg-orange">
             <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
-              All Recipes
+              Lastest Recipes
             </h2>
           </div>
           <div className="grid grid-cols-1 grid-rows-3 gap-4">

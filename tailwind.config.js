@@ -14,6 +14,7 @@ export default {
         "dark-light-grey": "#757575",
         "dark-orange": "#e65100",
         "very-dark-orange": "#7e2c00",
+        "very-light-grey": "#F2F2F2",
       },
       spacing: {
         128: "32rem",
