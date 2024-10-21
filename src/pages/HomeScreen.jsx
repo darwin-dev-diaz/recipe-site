@@ -1,5 +1,6 @@
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
+import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
 import image from "../assets/images/pancake.jpg";
 import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
@@ -59,6 +60,16 @@ function HomeScreen() {
           <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
           <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
           <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
+        </div>
+      </div>
+
+      <div className="section mb-24">
+        <div className="grid grid-cols-1 gap-8">
+
+        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
         </div>
       </div>
     </>
