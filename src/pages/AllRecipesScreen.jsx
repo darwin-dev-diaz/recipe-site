@@ -5,7 +5,7 @@ import AllRecipesRecipe from "../components/AllRecipesRecipe";
 
 function AllRecipesScreen() {
   return (
-    <>
+    <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
         <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
           All Recipes
@@ -29,7 +29,7 @@ function AllRecipesScreen() {
         <AllRecipesRecipe image={image}></AllRecipesRecipe>
         <AllRecipesRecipe image={image}></AllRecipesRecipe>
       </div>
-    </>
+    </div>
   );
 }
 

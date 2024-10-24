@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header></Header>
-      <div className="body w-full px-6">
+      <div className="body w-full">
         <Outlet context={[]} />
       </div>
       <Footer></Footer>

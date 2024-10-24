@@ -7,7 +7,7 @@ import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
   return (
-    <>
+    <div className="px-6">
       <div className="section mb-16">
         <div className="relative mb-8 mt-10 flex flex-col gap-4">
           <div className="absolute left-[50%] z-40 flex h-12 w-full max-w-96 translate-x-[-50%] translate-y-[-50%] items-center bg-orange">
@@ -72,7 +72,7 @@ function HomeScreen() {
         <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
