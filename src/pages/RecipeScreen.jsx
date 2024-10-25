@@ -9,6 +9,7 @@ import SvgHalfStar from "../assets/icons/HalfStar";
 function RecipeScreen() {
   return (
     <>
+      {/* top section start */}
       <div className="section px-6">
         <h1 className="mt-10 text-3xl font-extrabold uppercase">
           Pumpkin Pancake
@@ -50,6 +51,7 @@ function RecipeScreen() {
         </div>
       </div>
 
+      {/*bottom section start  */}
       <div className="section relative flex h-80 w-full flex-col items-center gap-3 bg-very-dark-orange bg-cover bg-center px-6 pt-20 font-medium uppercase text-white">
         <div
           className="absolute left-[50%] top-0 h-32 w-32 translate-x-[-50%] translate-y-[-50%] rounded-full border-[6px] border-very-dark-orange bg-dark-orange bg-cover bg-center"
@@ -84,6 +86,7 @@ function RecipeScreen() {
           <SvgFavorite color="black"></SvgFavorite>
         </Button>
 
+        {/* ingredients start */}
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Ingredients</h3>
         <ul className="mb-9 ml-6 flex list-disc flex-col gap-2">
           <li className="text-sm font-semibold uppercase">
@@ -152,7 +155,7 @@ function RecipeScreen() {
             1 15oz. can crushed tomatoes
           </li>
         </ul>
-
+        {/* instructions start */}
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Instructions</h3>
         <div className="mb-8 flex flex-col gap-4">
           <div className="flex gap-4">
