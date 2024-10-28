@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Button from "./primatives/Button";
-function FavoriteRecipe(props) {
+function RemoveableRecipe(props) {
   return (
     <div className="flex w-[13.5rem] flex-col place-self-center justify-self-center">
       <div
@@ -31,9 +31,9 @@ function FavoriteRecipe(props) {
   );
 }
 
-FavoriteRecipe.propTypes = {
+RemoveableRecipe.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
 };
-export default FavoriteRecipe;
+export default RemoveableRecipe;

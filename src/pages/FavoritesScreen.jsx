@@ -1,5 +1,5 @@
 import image from "../assets/images/pancake.jpg";
-import FavoriteRecipe from "../components/FavoriteRecipe";
+import RemoveableRecipe from "../components/RemoveableRecipe";
 
 function FavoritesScreen() {
   return (
@@ -10,12 +10,12 @@ function FavoritesScreen() {
         </h2>
       </div>
       <div className="section mb-16 grid w-full grid-cols-2 items-center justify-center gap-y-3">
-        <FavoriteRecipe image={image}></FavoriteRecipe>
-        <FavoriteRecipe image={image}></FavoriteRecipe>
-        <FavoriteRecipe image={image}></FavoriteRecipe>
-        <FavoriteRecipe image={image}></FavoriteRecipe>
-        <FavoriteRecipe image={image}></FavoriteRecipe>
-        <FavoriteRecipe image={image}></FavoriteRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
+        <RemoveableRecipe image={image}></RemoveableRecipe>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const SvgArrowRight = (props) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <path d="M8 4v16l8-8z" />
+    <path d="M8 4v16l8-8z" fill="black" />
   </svg>
 );
 export default SvgArrowRight;

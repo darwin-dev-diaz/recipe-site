@@ -1,4 +1,3 @@
-
 const SvgArrowLeft = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +7,7 @@ const SvgArrowLeft = (props) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <path d="M16 20L8 12l8-8z" />
+    <path d="M16 20L8 12l8-8z" fill="black" />
   </svg>
 );
 export default SvgArrowLeft;
