@@ -2,20 +2,25 @@ import SvgAdd from "../assets/icons/Add";
 import SvgRemove from "../assets/icons/Remove";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function MobileMenu() {
+function MobileMenu(props) {
   const [favoritesOpen, setFavoritesOpen] = useState(false);
+
   return (
     <nav className="absolute top-16 w-full bg-white py-8 shadow-lg">
       <ul className="flex w-full flex-col gap-4">
-        <li className="cursor-pointer">
-          <a href="" className="pl-6 text-xl font-extrabold uppercase">
+        <li onClick={props.closeMenu} className="cursor-pointer">
+          <Link to="/" className="pl-6 text-xl font-extrabold uppercase">
             Home
-          </a>
+          </Link>
         </li>
         <hr className="mx-auto h-[1.78px] w-[95%] border-0 bg-light-grey" />
-        <li className="cursor-pointer">
-          <Link to="allrecipes" className="pl-6 text-xl font-extrabold uppercase">
+        <li onClick={props.closeMenu} className="cursor-pointer">
+          <Link
+            to="allrecipes"
+            className="pl-6 text-xl font-extrabold uppercase"
+          >
             All recipes
           </Link>
         </li>
@@ -52,20 +57,27 @@ function MobileMenu() {
           </div>
         </ul>
         <hr className="mx-auto h-[1.78px] w-[95%] border-0 bg-light-grey" />
-        <li className="cursor-pointer">
-          <a href="" className="pl-6 text-xl font-extrabold uppercase">
+        <li onClick={props.closeMenu} className="cursor-pointer">
+          <Link
+            to="favorites"
+            className="pl-6 text-xl font-extrabold uppercase"
+          >
             Favorites
-          </a>
+          </Link>
         </li>
         <hr className="mx-auto h-[1.78px] w-[95%] border-0 bg-light-grey" />
-        <li className="cursor-pointer">
-          <a href="" className="pl-6 text-xl font-extrabold uppercase">
+        <li onClick={props.closeMenu} className="cursor-pointer">
+          <Link to="plan" className="pl-6 text-xl font-extrabold uppercase">
             Monthly planner
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
   );
 }
+
+MobileMenu.propTypes = {
+  closeMenu: PropTypes.func,
+};
 
 export default MobileMenu;

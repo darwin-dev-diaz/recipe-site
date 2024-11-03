@@ -19,6 +19,7 @@ function Header() {
 
       <Link
         to="/"
+        onClick={()=>setMobileMenuOpen(false)}
         aria-label="Home"
         className="justify-item-center relative flex items-center gap-2 text-2xl font-semibold uppercase text-white"
       >
@@ -28,7 +29,9 @@ function Header() {
       <IconButton aria-label="Search">
         <SvgSearch></SvgSearch>
       </IconButton>
-      {mobileMenuOpen ? <MobileMenu></MobileMenu> : null}
+      {mobileMenuOpen ? (
+        <MobileMenu closeMenu={() => setMobileMenuOpen(false)}></MobileMenu>
+      ) : null}
     </header>
   );
 }
