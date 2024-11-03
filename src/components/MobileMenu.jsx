@@ -1,6 +1,7 @@
 import SvgAdd from "../assets/icons/Add";
 import SvgRemove from "../assets/icons/Remove";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function MobileMenu() {
   const [favoritesOpen, setFavoritesOpen] = useState(false);
@@ -14,9 +15,9 @@ function MobileMenu() {
         </li>
         <hr className="mx-auto h-[1.78px] w-[95%] border-0 bg-light-grey" />
         <li className="cursor-pointer">
-          <a href="" className="pl-6 text-xl font-extrabold uppercase">
+          <Link to="allrecipes" className="pl-6 text-xl font-extrabold uppercase">
             All recipes
-          </a>
+          </Link>
         </li>
         <hr className="mx-auto h-[1.78px] w-[95%] border-0 bg-light-grey" />
         <ul className="cursor-pointer">

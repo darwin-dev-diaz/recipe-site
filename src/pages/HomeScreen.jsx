@@ -51,7 +51,7 @@ function HomeScreen() {
         </h2>
         <div
           className="flex gap-4 overflow-scroll"
-          style={{ "-ms-overflow-style": "none", "scrollbar-width": "none" }}
+          style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
           <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
           <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
@@ -65,11 +65,10 @@ function HomeScreen() {
 
       <div className="section mb-24">
         <div className="grid grid-cols-1 gap-8">
-
-        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-        <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
         </div>
       </div>
     </div>
