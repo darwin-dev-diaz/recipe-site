@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { RecipeContext } from "../App";
+
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
@@ -6,6 +9,10 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
+  const { data } = useContext(RecipeContext);
+  console.log("Data from homescreen");
+  console.log(data);
+
   return (
     <div className="px-6">
       <div className="section mb-16">
