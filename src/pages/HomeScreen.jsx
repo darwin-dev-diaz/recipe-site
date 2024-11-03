@@ -36,7 +36,7 @@ function HomeScreen() {
         <Button
           width="max-w-[400px] w-full"
           height="h-[50px]"
-          color="light-orange"
+          color="orange"
           textColor="white"
           text="View all recipes"
           extraCss="mx-auto"
