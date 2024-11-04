@@ -19,11 +19,14 @@ function App() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [expandedData, setExpandedData] = useState({});
 
-  // once the data is loaded, set the favorite recipes arr
+  // once the data is loaded, set the favoriteRecipes and populate expandedData
+  // maybe move to homeScreen
   useEffect(() => {
     const func = async () => {
       const tempArr = await Promise.all(
-        data.slice(0, 3).map((recipe) => fetchRecipeData(recipe.id, true)),
+        [716311, 646043, 644826].map((recipeID) =>
+          fetchRecipeData(recipeID, true),
+        ),
       );
       tempArr.forEach((recipe) => {
         const newExpandedData = expandedData;
@@ -35,10 +38,8 @@ function App() {
       setFavoriteRecipes(tempArr);
     };
 
-    if (data.length > 0) func();
-  }, [data]);
-
-  console.log(expandedData)
+    func();
+  }, []);
 
   return (
     <RecipeContext.Provider
