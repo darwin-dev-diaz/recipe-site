@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import key from "../../apiKey";
 const exampleResponse = {
   results: [
     {
@@ -43,7 +44,7 @@ const useData = (test = false) => {
   const [error, setError] = useState(null);
 
   const link =
-    "https://api.spoonacular.com/recipes/complexSearch?apiKey=33bb8b680cd84aaeb85140ac36dc42dd&cuisine=asian&number=1&type=dessert";
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=1&type=dessert`;
 
   useEffect(() => {
     if (test) {

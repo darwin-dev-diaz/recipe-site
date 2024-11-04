@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import fetchRecipeData from "./getRecipeData";
+import fetchRecipeData from "./fetchRecipeData";
 const useRecipeData = (id, test = false) => {
   const [recipeData, setData] = useState([]);
   const [recipeLoading, setLoading] = useState(true);
