@@ -9,7 +9,7 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const { data, error, loading, favoriteRecipes } = useContext(RecipeContext);
+  const { data, error, loading, latestRecipes } = useContext(RecipeContext);
 
   return (
     <div className="px-6">
@@ -21,7 +21,7 @@ function HomeScreen() {
             </h2>
           </div>
           <div className="grid grid-cols-1 grid-rows-3 gap-4">
-            {favoriteRecipes.map((recipe, i) => (
+            {latestRecipes.map((recipe, i) => (
               <RecipeDisplayOne
                 key={i}
                 image={

@@ -16,10 +16,10 @@ export const RecipeContext = createContext({
 
 function App() {
   const { data, error, loading } = useData(true);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [latestRecipes, setLatestRecipes] = useState([]);
   const [expandedData, setExpandedData] = useState({});
 
-  // once the data is loaded, set the favoriteRecipes and populate expandedData
+  // once the data is loaded, set the latestRecipes and populate expandedData
   // maybe move to homeScreen
   useEffect(() => {
     const func = async () => {
@@ -35,7 +35,7 @@ function App() {
           setExpandedData(newExpandedData);
         }
       });
-      setFavoriteRecipes(tempArr);
+      setLatestRecipes(tempArr);
     };
 
     func();
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <RecipeContext.Provider
-      value={{ data, error, loading, expandedData, favoriteRecipes }}
+      value={{ data, error, loading, expandedData, latestRecipes }}
     >
       <Header></Header>
       <div className="body w-full">
