@@ -17,6 +17,7 @@ export const RecipeContext = createContext({
 function App() {
   const { data, error, loading } = useData(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [expandedData, setExpandedData] = useState({});
 
   // once the data is loaded, set the favorite recipes arr
   useEffect(() => {
@@ -24,14 +25,21 @@ function App() {
       const tempArr = await Promise.all(
         data.slice(0, 3).map((recipe) => fetchRecipeData(recipe.id, true)),
       );
-      console.log(tempArr);
+      tempArr.forEach((recipe) => {
+        const newExpandedData = expandedData;
+        if (!newExpandedData[recipe.id]) {
+          newExpandedData[recipe.id] = recipe;
+          setExpandedData(newExpandedData);
+        }
+      });
       setFavoriteRecipes(tempArr);
     };
 
     if (data.length > 0) func();
   }, [data]);
 
-  const [expandedData, setExpandedData] = useState([]);
+  console.log(expandedData)
+
   return (
     <RecipeContext.Provider
       value={{ data, error, loading, expandedData, favoriteRecipes }}
