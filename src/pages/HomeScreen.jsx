@@ -9,9 +9,8 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const { data } = useContext(RecipeContext);
-  console.log("Data from homescreen");
-  console.log(data);
+  const { data, error, loading } = useContext(RecipeContext);
+  const favortieRecipes = data.slice(0, 3);
 
   return (
     <div className="px-6">
@@ -23,21 +22,18 @@ function HomeScreen() {
             </h2>
           </div>
           <div className="grid grid-cols-1 grid-rows-3 gap-4">
-            <RecipeDisplayOne
-              image={image}
-              title="Pumpking pancakes"
-              subtitle="$5.00 Recipe / $0.50 Serving"
-            ></RecipeDisplayOne>
-            <RecipeDisplayOne
-              image={image}
-              title="Pumpking pancakes"
-              subtitle="$5.00 Recipe / $0.50 Serving"
-            ></RecipeDisplayOne>
-            <RecipeDisplayOne
-              image={image}
-              title="Pumpking pancakes"
-              subtitle="$5.00 Recipe / $0.50 Serving"
-            ></RecipeDisplayOne>
+            {favortieRecipes.map((recipe, i) => (
+              <RecipeDisplayOne
+                key={i}
+                image={
+                  loading
+                    ? null
+                    : `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
+                }
+                title={loading ? "Loading" : recipe.title}
+                subtitle="$5.00 Recipe / $0.50 Serving"
+              ></RecipeDisplayOne>
+            ))}
           </div>
         </div>
         <Button

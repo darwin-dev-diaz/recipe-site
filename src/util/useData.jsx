@@ -47,8 +47,8 @@ const useData = (test = false) => {
 
   useEffect(() => {
     if (test) {
-      setData(exampleResponse);
-      setLoading(true);
+      setData(exampleResponse.results);
+      setLoading(false);
     } else {
       fetch(link, { mode: "cors" })
         .then((result) => {
@@ -63,7 +63,7 @@ const useData = (test = false) => {
           return response.json();
         })
         .then((json) => {
-          setData(json);
+          setData(json.results);
         })
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
