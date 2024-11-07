@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { RecipeContext } from "../App";
 import { Link } from "react-router-dom";
+import { idToImage } from "../util/idToImage";
 
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
@@ -25,11 +26,7 @@ function HomeScreen() {
             {latestRecipes.map((recipe, i) => (
               <RecipeDisplayOne
                 key={i}
-                image={
-                  loading
-                    ? null
-                    : `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-                }
+                image={loading ? null : idToImage(recipe.id)}
                 title={loading ? "Loading" : recipe.title}
                 subtitle={`${Math.round(recipe.nutrition.nutrients[0].amount)} kCal | ${Math.round(recipe.nutrition.nutrients[3].amount)} Carbs`}
               ></RecipeDisplayOne>
@@ -59,26 +56,35 @@ function HomeScreen() {
           style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
           <RecipeDisplayCircle
-            image={image}
+            image={idToImage(716364)}
             title="entrée"
+            to="/allrecipes/main%20course"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
-            image={image}
+            image={idToImage(638717)}
             title="dessert"
+            to="/allrecipes/dessert"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
-            image={image}
+            image={idToImage(642129)}
             title="snacks"
+            to="/allrecipes/snacks"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
-            image={image}
+            image={idToImage(1096250)}
             title="soups"
+            to="/allrecipes/soups"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
-            image={image}
+            image={idToImage(665379)}
             title="appetizer"
+            to="/allrecipes/appetizer"
           ></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image} title="Diet"></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={idToImage(660231)}
+            title="Diet"
+            to="/allrecipes/"
+          ></RecipeDisplayCircle>
         </div>
       </div>
 
@@ -87,11 +93,7 @@ function HomeScreen() {
           {featuredRecipes.map((recipe, i) => (
             <RecipeDisplayTwo
               key={i}
-              image={
-                loading
-                  ? null
-                  : `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-              }
+              image={loading ? null : idToImage(recipe.id)}
               title={loading ? "Loading" : recipe.title}
               text={loading ? "Loading" : recipe.summary}
             ></RecipeDisplayTwo>
