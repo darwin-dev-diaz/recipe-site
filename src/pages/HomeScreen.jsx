@@ -9,7 +9,8 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const { data, error, loading, latestRecipes } = useContext(RecipeContext);
+  const { data, error, loading, latestRecipes, featuredRecipes } =
+    useContext(RecipeContext);
 
   return (
     <div className="px-6">
@@ -67,10 +68,18 @@ function HomeScreen() {
 
       <div className="section mb-24">
         <div className="grid grid-cols-1 gap-8">
-          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
-          <RecipeDisplayTwo image={image}></RecipeDisplayTwo>
+          {featuredRecipes.map((recipe, i) => (
+            <RecipeDisplayTwo
+              key={i}
+              image={
+                loading
+                  ? null
+                  : `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
+              }
+              title={loading ? "Loading" : recipe.title}
+              text={loading ? "Loading" : recipe.summary}
+            ></RecipeDisplayTwo>
+          ))}
         </div>
       </div>
     </div>

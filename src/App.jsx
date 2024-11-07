@@ -11,15 +11,17 @@ export const RecipeContext = createContext({
   error: null,
   loading: true,
   expandedData: [],
-  favoriteRecipes: [],
+  latestRecipes: [],
+  featuredRecipes: [],
 });
 
 function App() {
   const { data, error, loading } = useData(true);
   const [latestRecipes, setLatestRecipes] = useState([]);
+  const [featuredRecipes, setFeaturedRecipes] = useState([]);
   const [expandedData, setExpandedData] = useState({});
 
-  // once the data is loaded, set the latestRecipes and populate expandedData
+  // set the latestRecipes and populate expandedData
   // maybe move to homeScreen
   useEffect(() => {
     const func = async () => {
@@ -41,9 +43,39 @@ function App() {
     func();
   }, []);
 
+  // set the featuredRecipes and populate expandedData
+  // maybe move to homeScreen
+  useEffect(() => {
+    const func = async () => {
+      const tempArr = await Promise.all(
+        [638649, 641111, 641908, 648506, 638642].map((recipeID) =>
+          fetchRecipeData(recipeID, true),
+        ),
+      );
+      // set expandedData so you dont have to call it again
+      tempArr.forEach((recipe) => {
+        const newExpandedData = expandedData;
+        if (!newExpandedData[recipe.id]) {
+          newExpandedData[recipe.id] = recipe;
+          setExpandedData(newExpandedData);
+        }
+      });
+      setFeaturedRecipes(tempArr);
+    };
+
+    func();
+  }, []);
+
   return (
     <RecipeContext.Provider
-      value={{ data, error, loading, expandedData, latestRecipes }}
+      value={{
+        data,
+        error,
+        loading,
+        expandedData,
+        latestRecipes,
+        featuredRecipes,
+      }}
     >
       <Header></Header>
       <div className="body w-full">
