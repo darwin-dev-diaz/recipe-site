@@ -1,24 +1,29 @@
 import PropTypes from "prop-types";
 import Button from "./primatives/Button";
+import { Link } from "react-router-dom";
 function AllRecipesRecipe(props) {
   return (
-    <div className="flex w-[13.5rem] flex-col place-self-center justify-self-center">
+    <div className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col place-self-center justify-self-center">
       <div
         className="h-[21rem] w-full self-center bg-black bg-cover bg-center"
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
-      <span className="text-xl font-extrabold uppercase my-3 text-center">Pumpkin Pasta</span>
+      <span className="my-3 text-center text-xl font-extrabold uppercase">
+        {props.title}
+      </span>
       {/* <span className="text-sm font-semibold uppercase text-dark-light-grey">
         $5.00 Recipe / $0.50 Serving
       </span> */}
-      <Button
-        width="w-full"
-        height="h-[50px]"
-        color="orange"
-        textColor="white"
-        text="view recipe"
-        extraCss="mx-auto"
-      ></Button>
+      <Link to={props.to}>
+        <Button
+          width="w-full"
+          height="h-[50px]"
+          color="orange"
+          textColor="white"
+          text="view recipe"
+          extraCss="mx-auto"
+        ></Button>
+      </Link>
     </div>
   );
 }
@@ -26,6 +31,6 @@ function AllRecipesRecipe(props) {
 AllRecipesRecipe.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
-  subtitle: PropTypes.string,
+  to: PropTypes.string,
 };
 export default AllRecipesRecipe;

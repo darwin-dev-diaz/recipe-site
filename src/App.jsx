@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import useData from "./util/useData";
 // import useRecipeData from "./util/useRecipeData";
 // import fetchRecipeData from "./util/fetchRecipeData";
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import { latestRecipes, featuredRecipes } from "./data/prefilledData";
 
 export const RecipeContext = createContext({
@@ -17,9 +17,8 @@ export const RecipeContext = createContext({
 });
 
 function App() {
-  const { data, error, loading } = useData(false);
+  const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
-  console.log(data);
 
   // set the latestRecipes and populate expandedData
   // maybe move to homeScreen
