@@ -7,7 +7,7 @@ function RecipeDisplayCircle(props) {
         className="h-32 w-32 rounded-full bg-black bg-cover bg-center"
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
-      <h3 className="text-lg font-bold uppercase">Under $10</h3>
+      <h3 className="text-center text-lg font-bold uppercase">{props.title}</h3>
     </div>
   );
 }

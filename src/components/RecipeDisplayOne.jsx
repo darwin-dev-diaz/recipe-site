@@ -7,7 +7,7 @@ function RecipeDisplayOne(props) {
       style={{ backgroundImage: `url(${props.image})` }}
     >
       <div className="absolute bottom-10 left-10 flex flex-col gap-2">
-        <h3 className="w-fit max-w-[95%] bg-white px-[14px] py-[8px] text-2xl font-extrabold uppercase">
+        <h3 className="bg-white px-[14px] py-[8px] text-2xl font-extrabold uppercase">
           {props.title}
         </h3>
         <p className="text-l w-fit bg-white p-[6px] font-semibold uppercase tracking-tighter text-dark-light-grey">

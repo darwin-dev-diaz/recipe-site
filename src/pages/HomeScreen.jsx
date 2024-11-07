@@ -58,13 +58,27 @@ function HomeScreen() {
           className="flex gap-4 overflow-scroll"
           style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
-          <RecipeDisplayCircle image={image}></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={image}
+            title="entrée"
+          ></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={image}
+            title="dessert"
+          ></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={image}
+            title="snacks"
+          ></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={image}
+            title="soups"
+          ></RecipeDisplayCircle>
+          <RecipeDisplayCircle
+            image={image}
+            title="appetizer"
+          ></RecipeDisplayCircle>
+          <RecipeDisplayCircle image={image} title="Diet"></RecipeDisplayCircle>
         </div>
       </div>
 
