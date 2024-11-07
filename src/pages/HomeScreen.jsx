@@ -80,11 +80,11 @@ function HomeScreen() {
             title="appetizer"
             to="/allrecipes/appetizer"
           ></RecipeDisplayCircle>
-          <RecipeDisplayCircle
+          {/* <RecipeDisplayCircle
             image={idToImage(660231)}
             title="Diet"
             to="/allrecipes/"
-          ></RecipeDisplayCircle>
+          ></RecipeDisplayCircle> */}
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { removeDuplicateObjs } from "./returnUniqueArrOfObj";
 import key from "../../apiKey";
 const exampleResponse = {
   results: [
@@ -43,28 +44,40 @@ const useData = (test = false) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const link =
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=1&type=dessert`;
+  const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
+  const dishTypes = ["main%20course", "dessert", "soup", "appetizer"];
 
   useEffect(() => {
     if (test) {
       setData(exampleResponse.results);
       setLoading(false);
     } else {
-      fetch(link, { mode: "cors" })
-        .then((result) => {
-          return new Promise((resolve) => {
-            setTimeout(() => resolve(result), 1000);
-          });
-        })
-        .then((response) => {
-          if (response.status >= 400) {
-            throw new Error("Server Error");
-          }
-          return response.json();
-        })
-        .then((json) => {
-          setData(json.results);
+      const fetchPromises = dishTypes.map((dish) =>
+        fetch(link + dish, { mode: "cors" })
+          .then(
+            (result) =>
+              new Promise((resolve) => {
+                setTimeout(() => resolve(result), 0);
+              }),
+          )
+          .then((response) => {
+            if (response.status >= 400) {
+              throw new Error("Server Error");
+            }
+            return response.json();
+          })
+          .then((json) => {
+            return json.results.map((item) => ({
+              ...item,
+              myDishType: dish.replace("%20", " "),
+            }));
+          }),
+      );
+
+      Promise.all(fetchPromises)
+        .then((results) => {
+          const output = removeDuplicateObjs(results.flat());
+          setData(output);
         })
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
