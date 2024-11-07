@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { RecipeContext } from "../App";
+import { Link } from "react-router-dom";
 
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
@@ -36,16 +37,18 @@ function HomeScreen() {
             ))}
           </div>
         </div>
-        <Button
-          width="max-w-[400px] w-full"
-          height="h-[50px]"
-          color="orange"
-          textColor="white"
-          text="View all recipes"
-          extraCss="mx-auto"
-        >
-          <SvgAdd color="white"></SvgAdd>
-        </Button>
+        <Link to="/allrecipes">
+          <Button
+            width="max-w-[400px] w-full"
+            height="h-[50px]"
+            color="orange"
+            textColor="white"
+            text="View all recipes"
+            extraCss="mx-auto"
+          >
+            <SvgAdd color="white"></SvgAdd>
+          </Button>
+        </Link>
       </div>
 
       <div className="section mb-16">
