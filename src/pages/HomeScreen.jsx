@@ -10,8 +10,7 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const { data, error, loading, latestRecipes, featuredRecipes } =
-    useContext(RecipeContext);
+  const { loading, latestRecipes, featuredRecipes } = useContext(RecipeContext);
 
   return (
     <div className="px-6">
