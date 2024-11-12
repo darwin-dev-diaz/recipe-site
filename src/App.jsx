@@ -6,18 +6,19 @@ import useData from "./util/useData";
 // import fetchRecipeData from "./util/fetchRecipeData";
 import { useState, createContext } from "react";
 import { latestRecipes, featuredRecipes } from "./data/prefilledData";
+import ScrollToTop from "./util/ScrollToTop";
 
 export const RecipeContext = createContext({
   data: [], // this will be all the recipes and their 'simple' information
   error: null,
   loading: true,
-  expandedData: [], // this will be the recipes "expanded" information. Populates as need
+  expandedData: [], // this will be the recipes "expanded" information. Populates as needed
   latestRecipes: [],
   featuredRecipes: [],
 });
 
 function App() {
-  const { data, error, loading } = useData(false);
+  const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
 
   // set the latestRecipes and populate expandedData
@@ -51,6 +52,7 @@ function App() {
         featuredRecipes,
       }}
     >
+      <ScrollToTop />
       <Header></Header>
       <div className="body w-full">
         <Outlet context={[]} />

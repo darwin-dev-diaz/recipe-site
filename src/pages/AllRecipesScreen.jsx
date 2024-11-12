@@ -10,11 +10,11 @@ import AllRecipesRecipe from "../components/AllRecipesRecipe";
 function AllRecipesScreen() {
   const { data, loading } = useContext(RecipeContext);
   const [sortOpen, setSortOpen] = useState(false);
-  const [selected, setSelected] = useState(-1);
-  const dishTypes = ["main courses", "soups", "appetizers", "desserts"];
+  const [selected, setSelected] = useState(0);
+  const dishTypes = ["none", "main courses", "soups", "appetizers", "desserts"];
 
   const selectedData =
-    selected === -1
+    selected === 0
       ? data
       : data.filter((recipe) => recipe.myDishType === dishTypes[selected]);
 
