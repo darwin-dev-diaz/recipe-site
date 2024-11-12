@@ -8,28 +8,28 @@ const exampleResponse = {
       title: "Chinese Steamed Flan",
       image: "https://img.spoonacular.com/recipes/638717-312x231.jpg",
       imageType: "jpg",
-      dishType: "main course",
+      myDishType: "main courses",
     },
     {
       id: 665484,
       title: "Xocai Oatmeal Dark Chocolate No-Bake Cookies",
       image: "https://img.spoonacular.com/recipes/665484-312x231.jpg",
       imageType: "jpg",
-      dishType: "appetizer",
+      myDishType: "appetizers",
     },
     {
       id: 663176,
       title: "Thai-Style Sticky Rice & Mango Dessert Shots",
       image: "https://img.spoonacular.com/recipes/663176-312x231.jpg",
       imageType: "jpg",
-      dishType: "dessert",
+      myDishType: "desserts",
     },
     {
       id: 649056,
       title: "Korean Honey Citron Tea Cheesecake",
       image: "https://img.spoonacular.com/recipes/649056-312x231.jpg",
       imageType: "jpg",
-      dishType: "soup",
+      myDishType: "soups",
     },
   ],
   offset: 0,
@@ -65,9 +65,10 @@ const useData = (test = false) => {
             return response.json();
           })
           .then((json) => {
+            const myDishType = dish.replace("%20", " ") + "s";
             return json.results.map((item) => ({
               ...item,
-              myDishType: dish.replace("%20", " "),
+              myDishType: myDishType,
             }));
           }),
       );
