@@ -1,6 +1,8 @@
 import { RecipeContext } from "../App";
 import { useContext } from "react";
 import { idToImage } from "../util/idToImage";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import image from "../assets/images/pancake.jpg";
 import Button from "../components/primatives/Button";
@@ -9,6 +11,9 @@ import AllRecipesRecipe from "../components/AllRecipesRecipe";
 
 function AllRecipesScreen() {
   const { data, loading } = useContext(RecipeContext);
+  const [sortOpen, setSortOpen] = useState(false);
+  const [selected, setSelected] = useState(-1);
+  console.log("render");
   return (
     <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
@@ -16,16 +21,45 @@ function AllRecipesScreen() {
           All Recipes
         </h2>
       </div>
-      <Button
-        width="w-fit"
-        height="h-[50px]"
-        color="very-light-grey"
-        textColor="dark-grey"
-        text="Sort by..."
-        extraCss="mx-auto mb-8"
-      >
-        <SvgFilterList color=""></SvgFilterList>
-      </Button>
+      <div className="mx-auto mb-6 flex w-[11rem] cursor-pointer flex-col items-center">
+        <Button
+          height="h-[50px]"
+          color="very-light-grey"
+          textColor="dark-grey"
+          text="Sort by..."
+          extraCss="mx-auto"
+          onClick={() => setSortOpen(!sortOpen)}
+        >
+          <SvgFilterList color=""></SvgFilterList>
+        </Button>
+
+        {sortOpen ? (
+          <div className="flex h-fit w-[11rem] flex-col justify-center gap-4 bg-very-light-grey p-4">
+            {["main courses", "soups", "appetizers", "desserts"].map(
+              (item, i) => (
+                <div
+                  key={i}
+                  // to={`./${item.replace(" ", "-")}`}
+                  // to={`./`}
+                  className="justify-left flex items-center gap-2"
+                  onClick={() => setSelected(i)}
+                >
+                  <div
+                    className={`h-[15px] w-[15px] rounded-full`}
+                    style={{
+                      backgroundColor: `${selected === -1 ? "lightgrey" : selected === i ? "var(--black)" : "lightgrey"}`,
+                    }}
+                  ></div>
+                  <div className="text-sm font-bold uppercase text-black">
+                    {item}
+                  </div>
+                </div>
+              ),
+            )}
+          </div>
+        ) : null}
+      </div>
+
       <div className="section mb-16 grid w-full grid-cols-2 items-center justify-center gap-y-3">
         {data.map((recipe, i) => (
           <AllRecipesRecipe
