@@ -14,7 +14,6 @@ function RecipeScreen() {
 
   // this is if we already have it stored
   const recipeData = expandedData[recipeID];
-  console.log({ expandedData });
 
   // split the instructions into a managable list
   const analyzedInstructions = recipeData.analyzedInstructions;
@@ -24,6 +23,17 @@ function RecipeScreen() {
     if (block.steps.length)
       stepsArr = stepsArr.concat(block.steps.map((stepObj) => stepObj.step));
   });
+
+  const scrollToRecipe = (offset) => {
+    const recipe = document.getElementById("recipe");
+    window.scrollTo({
+      behavior: "smooth",
+      top:
+        recipe.getBoundingClientRect().top -
+        document.body.getBoundingClientRect().top -
+        offset,
+    });
+  };
 
   return (
     <>
@@ -49,6 +59,7 @@ function RecipeScreen() {
           textColor="dark-grey"
           text="Jump to recipe"
           extraCss="mx-auto mb-8 border-black border-4 shadow-[6px_6px_0px_rgba(0,0,0,1)]"
+          onClick={() => scrollToRecipe(100)}
         >
           <SvgDownArrow color=""></SvgDownArrow>
         </Button>
@@ -72,8 +83,12 @@ function RecipeScreen() {
       </div>
 
       {/*bottom section start  */}
-      <div className="section relative flex h-80 w-full flex-col items-center gap-3 bg-very-dark-orange bg-cover bg-center px-6 pt-20 font-medium uppercase text-white">
+      <div
+        // id="recipe"
+        className="section relative flex h-80 w-full flex-col items-center gap-3 bg-very-dark-orange bg-cover bg-center px-6 pt-20 font-medium uppercase text-white"
+      >
         <div
+          id="recipe"
           className="absolute left-[50%] top-0 h-32 w-32 translate-x-[-50%] translate-y-[-50%] rounded-full border-[6px] border-very-dark-orange bg-dark-orange bg-cover bg-center"
           style={{ backgroundImage: `url(${idToImage(recipeID)})` }}
         ></div>
