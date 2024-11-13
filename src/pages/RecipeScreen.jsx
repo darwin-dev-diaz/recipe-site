@@ -16,37 +16,14 @@ function RecipeScreen() {
   const recipeData = expandedData[recipeID];
   console.log({ expandedData });
 
-  // determine if the recipe text is html or plain, then break the recipe text into a list
-  let isHtml = recipeData.instructions.includes("<ol>", 0);
-  let items;
-  let instructionsArr;
-  if (isHtml) {
-    items = recipeData.instructions
-      .replace(/<ol>|<\/ol>|<\/li>/g, "")
-      .trim()
-      .split("<li>")
-      .filter((item) => item);
-
-    instructionsArr = [];
-    items.forEach((item) => {
-      if (item.match(/^For .*:$/gi) || item.match(/.*:$/)) {
-        instructionsArr.push([]);
-        instructionsArr[instructionsArr.length - 1].push(item);
-        return;
-      }
-
-      if (instructionsArr.length) {
-        instructionsArr[instructionsArr.length - 1].push(item);
-      }
-    });
-
-    if (!instructionsArr.length) {
-      instructionsArr = items;
-      isHtml = false;
-    }
-  } else {
-    instructionsArr = recipeData.instructions.split("\n");
-  }
+  // split the instructions into a managable list
+  const analyzedInstructions = recipeData.analyzedInstructions;
+  let stepsArr = [];
+  analyzedInstructions.forEach((block) => {
+    block.name && stepsArr.push(block.name);
+    if (block.steps.length)
+      stepsArr = stepsArr.concat(block.steps.map((stepObj) => stepObj.step));
+  });
 
   return (
     <>
@@ -142,39 +119,18 @@ function RecipeScreen() {
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Instructions</h3>
 
         <div className="mb-8 flex flex-col gap-4">
-          {isHtml ? (
-            instructionsArr.map((arr, i) => (
-              <div key={i} className="flex flex-col gap-4">
-                <h4 className="mb-2 text-xl font-extrabold uppercase text-dark-grey">
-                  {arr[0]}
-                </h4>
-
-                {arr.slice(1).map((instruction, ii) => (
-                  <div key={(i + 1) * 100 + ii + 1}>
-                    <div className="flex gap-4">
-                      <div className="flex h-8 w-11 items-center justify-center border-2 border-black bg-orange text-center text-xl font-extrabold shadow-[3px_3px_0px_rgba(0,0,0,1)]">
-                        {ii + 1}
-                      </div>
-                      <span className="w-full">{instruction}</span>
-                    </div>
+          <div className="flex flex-col gap-4">
+            {stepsArr.map((instruction, i) => (
+              <div key={i}>
+                <div className="flex gap-4">
+                  <div className="flex h-8 w-11 items-center justify-center border-2 border-black bg-orange text-center text-xl font-extrabold shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+                    {i + 1}
                   </div>
-                ))}
-              </div>
-            ))
-          ) : (
-            <div className="flex flex-col gap-4">
-              {instructionsArr.map((instruction, i) => (
-                <div key={i}>
-                  <div className="flex gap-4">
-                    <div className="flex h-8 w-11 items-center justify-center border-2 border-black bg-orange text-center text-xl font-extrabold shadow-[3px_3px_0px_rgba(0,0,0,1)]">
-                      {i + 1}
-                    </div>
-                    <span className="w-full">{instruction}</span>
-                  </div>
+                  <span className="w-full">{instruction}</span>
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
