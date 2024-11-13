@@ -43,7 +43,7 @@ function RecipeScreen() {
           {recipeData.title}
         </h1>
         <p className="mb-6 font-semibold text-dark-light-grey">
-          $5.00 Recipe / $0.50 Serving
+          {`${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / ${Math.round(recipeData.nutrition.nutrients[10].amount)}g Protien`}
         </p>
 
         <p
@@ -102,7 +102,7 @@ function RecipeScreen() {
           <SvgStar fill="#F2B955"></SvgStar>
           <SvgStar fill="#F2B955"></SvgStar>
         </div>
-        <span>$5.00 Recipe / $0.50 Serving</span>
+        <span>{`${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / serving`}</span>
         <div className="flex gap-4">
           <span>Ready in: {recipeData.readyInMinutes} MINS</span>
           <span>Yields: {recipeData.servings} servings</span>
