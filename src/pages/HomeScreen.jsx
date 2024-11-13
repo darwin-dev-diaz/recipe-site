@@ -10,7 +10,7 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const { loading, latestRecipes, featuredRecipes } = useContext(RecipeContext);
+  const {latestRecipes, featuredRecipes } = useContext(RecipeContext);
 
   return (
     <div className="px-6">
@@ -25,8 +25,8 @@ function HomeScreen() {
             {latestRecipes.map((recipe, i) => (
               <RecipeDisplayOne
                 key={i}
-                image={loading ? null : idToImage(recipe.id)}
-                title={loading ? "Loading" : recipe.title}
+                image={idToImage(recipe.id)}
+                title={recipe.title}
                 id={recipe.id}
                 subtitle={`${Math.round(recipe.nutrition.nutrients[0].amount)} kCal | ${Math.round(recipe.nutrition.nutrients[3].amount)} Carbs`}
               ></RecipeDisplayOne>
@@ -94,9 +94,9 @@ function HomeScreen() {
             <RecipeDisplayTwo
               id={recipe.id}
               key={i}
-              image={loading ? null : idToImage(recipe.id)}
-              title={loading ? "Loading" : recipe.title}
-              text={loading ? "Loading" : recipe.summary}
+              image={idToImage(recipe.id)}
+              title={recipe.title}
+              text={recipe.summary}
             ></RecipeDisplayTwo>
           ))}
         </div>

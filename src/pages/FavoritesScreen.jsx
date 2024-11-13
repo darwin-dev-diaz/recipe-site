@@ -1,7 +1,13 @@
-import image from "../assets/images/pancake.jpg";
 import RemoveableRecipe from "../components/RemoveableRecipe";
+import { RecipeContext } from "../App";
+import { useContext } from "react";
+import { idToImage } from "../util/idToImage";
 
-function FavoritesScreen() {
+
+function FavoritesScreen(props) {
+  const { favoriteRecipes, expandedData, loading } = useContext(RecipeContext);
+  console.log({ favoriteRecipes, loading });
+
   return (
     <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
@@ -9,16 +15,25 @@ function FavoritesScreen() {
           Favorite recipes
         </h2>
       </div>
-      <div className="section mb-16 grid w-full grid-cols-2 items-center justify-center gap-y-3">
-        <RemoveableRecipe image={image}></RemoveableRecipe>
-        <RemoveableRecipe image={image}></RemoveableRecipe>
-        <RemoveableRecipe image={image}></RemoveableRecipe>
-        <RemoveableRecipe image={image}></RemoveableRecipe>
-        <RemoveableRecipe image={image}></RemoveableRecipe>
-        <RemoveableRecipe image={image}></RemoveableRecipe>
+      <div className="section mb-16 grid w-full grid-cols-2 items-center justify-center gap-y-3 text-center">
+        {favoriteRecipes.length
+          ? favoriteRecipes.map((recipeID, i) => {
+              const title = expandedData[recipeID].title;
+              return (
+                <RemoveableRecipe
+                  title={title}
+                  key={i}
+                  to={`/recipe/${recipeID}`}
+                  id={recipeID}
+                  image={idToImage(recipeID)}
+                ></RemoveableRecipe>
+              );
+            })
+          : "no favs yet"}
       </div>
     </div>
   );
 }
+
 
 export default FavoritesScreen;

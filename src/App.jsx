@@ -12,14 +12,25 @@ export const RecipeContext = createContext({
   data: [], // this will be all the recipes and their 'simple' information
   error: null,
   loading: true,
-  expandedData: [], // this will be the recipes "expanded" information. Populates as needed
+  expandedData: {}, // this will be the recipes "expanded" information. Populates as needed
+  favoriteRecipes: [],
   latestRecipes: [],
   featuredRecipes: [],
+  removeRecipe: () => {},
 });
 
 function App() {
   const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
+  const [favoriteRecipes, setFavoriteRecipes] = useState([641111]);
+  const removeFavorite = (id) => {
+
+    const newFavoriteRecipes = favoriteRecipes;
+    const removeIndex = newFavoriteRecipes.indexOf(id);
+    newFavoriteRecipes.splice(removeIndex, 1);
+    console.log({newFavoriteRecipes})
+    setFavoriteRecipes(newFavoriteRecipes);
+  };
 
   // set the latestRecipes and populate expandedData
   // maybe move to homeScreen
@@ -48,8 +59,10 @@ function App() {
         error,
         loading,
         expandedData,
+        favoriteRecipes,
         latestRecipes,
         featuredRecipes,
+        removeFavorite,
       }}
     >
       <ScrollToTop />

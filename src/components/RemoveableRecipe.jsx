@@ -1,24 +1,31 @@
 import PropTypes from "prop-types";
 import Button from "./primatives/Button";
+import { Link } from "react-router-dom";
+
+import { RecipeContext } from "../App";
+import { useContext } from "react";
 function RemoveableRecipe(props) {
+  const { removeFavorite } = useContext(RecipeContext);
   return (
-    <div className="flex w-[13.5rem] flex-col place-self-center justify-self-center">
+    <div className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col place-self-center justify-self-center">
       <div
         className="h-[21rem] w-full self-center bg-black bg-cover bg-center"
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
-      <span className="text-xl font-extrabold uppercase">Pumpkin Pasta</span>
-      <span className="text-sm font-semibold uppercase text-dark-light-grey">
-        $5.00 Recipe / $0.50 Serving
+      <span className="my-3 text-center text-xl font-extrabold uppercase">
+        {props.title}
       </span>
-      <Button
-        width="w-full"
-        height="h-[50px]"
-        color="orange"
-        textColor="white"
-        text="view recipe"
-        extraCss="mx-auto mb-2"
-      ></Button>
+
+      <Link to={props.to}>
+        <Button
+          width="w-full"
+          height="h-[50px]"
+          color="orange"
+          textColor="white"
+          text="view recipe"
+          extraCss="mx-auto mb-2"
+        ></Button>
+      </Link>
       <Button
         width="w-full"
         height="h-[50px]"
@@ -26,6 +33,7 @@ function RemoveableRecipe(props) {
         textColor="white"
         text="remove"
         extraCss="mx-auto"
+        onClick={() => removeFavorite(props.id)}
       ></Button>
     </div>
   );
@@ -34,6 +42,9 @@ function RemoveableRecipe(props) {
 RemoveableRecipe.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
+  id: PropTypes.number,
   subtitle: PropTypes.string,
+  to: PropTypes.string,
+  removeFavorite: PropTypes.func,
 };
 export default RemoveableRecipe;
