@@ -6,7 +6,6 @@ import { idToImage } from "../util/idToImage";
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
-import image from "../assets/images/pancake.jpg";
 import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
@@ -28,6 +27,7 @@ function HomeScreen() {
                 key={i}
                 image={loading ? null : idToImage(recipe.id)}
                 title={loading ? "Loading" : recipe.title}
+                id={recipe.id}
                 subtitle={`${Math.round(recipe.nutrition.nutrients[0].amount)} kCal | ${Math.round(recipe.nutrition.nutrients[3].amount)} Carbs`}
               ></RecipeDisplayOne>
             ))}
@@ -92,6 +92,7 @@ function HomeScreen() {
         <div className="grid grid-cols-1 gap-8">
           {featuredRecipes.map((recipe, i) => (
             <RecipeDisplayTwo
+              id={recipe.id}
               key={i}
               image={loading ? null : idToImage(recipe.id)}
               title={loading ? "Loading" : recipe.title}

@@ -19,7 +19,10 @@ function RecipeDisplayTwo(props) {
             __html: props.text,
           }}
         ></span>
-        <Link className="font-bold uppercase tracking-wider text-orange">
+        <Link
+          to={`/recipe/${props.id}`}
+          className="font-bold uppercase tracking-wider text-orange"
+        >
           Continue Reading
         </Link>
       </div>
@@ -31,5 +34,6 @@ RecipeDisplayTwo.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
+  id: PropTypes.number,
 };
 export default RecipeDisplayTwo;

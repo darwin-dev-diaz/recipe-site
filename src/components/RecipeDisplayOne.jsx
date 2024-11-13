@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function RecipeDisplayOne(props) {
   return (
-    <div
+    <Link
+      to={`/recipe/${props.id}`}
       className="relative h-80 w-full cursor-pointer bg-orange bg-cover bg-center"
       style={{ backgroundImage: `url(${props.image})` }}
     >
@@ -14,7 +16,7 @@ function RecipeDisplayOne(props) {
           {props.subtitle}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -22,5 +24,6 @@ RecipeDisplayOne.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  id: PropTypes.number,
 };
 export default RecipeDisplayOne;

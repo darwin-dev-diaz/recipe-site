@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
 
@@ -11,9 +11,15 @@ import SvgStar from "../assets/icons/Star";
 function RecipeScreen() {
   const { expandedData } = useContext(RecipeContext);
   const { recipeID } = useParams();
-
-  // this is if we already have it stored
   const recipeData = expandedData[recipeID];
+  // when i comment out the state and effect and use this ^ instead, all works fine
+
+  // const [recipeData, setRecipeData] = useState(expandedData[0]);
+  // useEffect(() => {
+  //   console.log("JUST PRINT OUT LITERALLY ANYTHING");
+  // }, []);
+
+  // console.log(expandedData);
 
   // split the instructions into a managable list
   const analyzedInstructions = recipeData.analyzedInstructions;
