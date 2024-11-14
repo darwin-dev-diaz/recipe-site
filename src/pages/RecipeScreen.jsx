@@ -10,18 +10,27 @@ import SvgFavorite from "../assets/icons/Favorite";
 import SvgStar from "../assets/icons/Star";
 
 function RecipeScreen() {
-  const { expandedData, favoriteRecipes, removeFavorite, addFavorite } =
+  const { data, expandedData, favoriteRecipes, removeFavorite, addFavorite } =
     useContext(RecipeContext);
   const { recipeID } = useParams();
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
+  const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
+
+  console.log({isRecipe}) // eventually redirect to not found page
 
   // Initial state as null or an empty object to prevent undefined errors
   const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // for disabling loading if recipe is already in expandedRecipes
   useEffect(() => {
-    const fetch = async () => {
+    if (recipeData) setLoading(false);
+  }, [recipeData]);
+
+  // for fetching the missing expandedRecipes
+  useEffect(() => {
+    const fetchRecipe = async () => {
       await fetchRecipeData(
         recipeID,
         false,
@@ -31,10 +40,11 @@ function RecipeScreen() {
       );
     };
 
-    if (!recipeData) {
-      fetch();
+    if (!recipeData && isRecipe) {
+      console.log("Called fetchRecipe");
+      fetchRecipe();
     }
-  }, [expandedData, recipeID, recipeData]);
+  }, [expandedData, recipeID, recipeData, isRecipe]);
 
   let stepsArr = [];
   if (recipeData) {

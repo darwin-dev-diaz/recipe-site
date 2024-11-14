@@ -31,6 +31,12 @@ const exampleResponse = {
       imageType: "jpg",
       myDishType: "soups",
     },
+    {
+      id: 632983,
+      title: "Assam Fish Curry",
+      image: "https://img.spoonacular.com/recipes/632983-312x231.jpg",
+      imageType: "jpg",
+    },
   ],
   offset: 0,
   number: 5,

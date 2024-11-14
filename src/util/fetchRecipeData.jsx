@@ -2108,7 +2108,7 @@ const fetchRecipeData = async (id, test, setData, setLoading, setError) => {
     const response = await fetch(link, { mode: "cors" });
     if (response.status >= 400) throw new Error("Server Error");
     const json = await response.json();
-    return setData ? setData(json) : json;
+    return setData ? setData((previousData) => json) : json;
   } catch (error) {
     return setError ? setError(error) : error;
   } finally {
