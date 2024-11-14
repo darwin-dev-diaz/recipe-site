@@ -10,13 +10,19 @@ import SvgFavorite from "../assets/icons/Favorite";
 import SvgStar from "../assets/icons/Star";
 
 function RecipeScreen() {
-  const { data, expandedData, favoriteRecipes, removeFavorite, addFavorite } =
-    useContext(RecipeContext);
+  const {
+    data,
+    expandedData,
+    addExpandedData,
+    favoriteRecipes,
+    removeFavorite,
+    addFavorite,
+  } = useContext(RecipeContext);
   const { recipeID } = useParams();
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
   const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
 
-  console.log({isRecipe}) // eventually redirect to not found page
+  // console.log({isRecipe}) // eventually redirect to not found page
 
   // Initial state as null or an empty object to prevent undefined errors
   const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
@@ -31,20 +37,23 @@ function RecipeScreen() {
   // for fetching the missing expandedRecipes
   useEffect(() => {
     const fetchRecipe = async () => {
-      await fetchRecipeData(
+      const result = await fetchRecipeData(
         recipeID,
         false,
-        setRecipeData,
+        undefined,
         setLoading,
         setError,
       );
+      setRecipeData(result);
+      addExpandedData(Number(recipeID), result);
     };
 
     if (!recipeData && isRecipe) {
-      console.log("Called fetchRecipe");
+      console.log("called fetchRecipe");
       fetchRecipe();
     }
-  }, [expandedData, recipeID, recipeData, isRecipe]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expandedData, recipeID, isRecipe]);
 
   let stepsArr = [];
   if (recipeData) {

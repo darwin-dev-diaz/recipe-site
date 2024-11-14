@@ -13,6 +13,7 @@ export const RecipeContext = createContext({
   error: null,
   loading: true,
   expandedData: {}, // this will be the recipes "expanded" information. Populates as needed
+  addExpandedData: () => {},
   favoriteRecipes: [],
   latestRecipes: [],
   featuredRecipes: [],
@@ -23,6 +24,9 @@ export const RecipeContext = createContext({
 function App() {
   const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
+  const addExpandedData = (id, data) => {
+    setExpandedData((prev) => ({ ...prev, [id]: data }));
+  };
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
@@ -60,6 +64,7 @@ function App() {
         error,
         loading,
         expandedData,
+        addExpandedData,
         favoriteRecipes,
         latestRecipes,
         featuredRecipes,
