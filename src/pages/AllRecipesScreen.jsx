@@ -18,7 +18,6 @@ function AllRecipesScreen() {
       ? data
       : data.filter((recipe) => recipe.myDishType === dishTypes[selected]);
 
-  console.log({ selectedData });
   return (
     <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
@@ -69,6 +68,7 @@ function AllRecipesScreen() {
             key={i}
             image={idToImage(recipe.id)}
             title={recipe.title}
+            to={`/recipe/${recipe.id}`}
           ></AllRecipesRecipe>
         ))}
       </div>

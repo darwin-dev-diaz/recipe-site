@@ -4,29 +4,29 @@ import key from "../../apiKey";
 const exampleResponse = {
   results: [
     {
-      id: 638717,
-      title: "Chinese Steamed Flan",
+      id: 641111,
+      title: "Curry Beef Over Rice Noodles",
       image: "https://img.spoonacular.com/recipes/638717-312x231.jpg",
       imageType: "jpg",
       myDishType: "main courses",
     },
     {
-      id: 665484,
-      title: "Xocai Oatmeal Dark Chocolate No-Bake Cookies",
+      id: 641908,
+      title: "Easy Chicken Tikka Masala",
       image: "https://img.spoonacular.com/recipes/665484-312x231.jpg",
       imageType: "jpg",
       myDishType: "appetizers",
     },
     {
-      id: 663176,
-      title: "Thai-Style Sticky Rice & Mango Dessert Shots",
+      id: 638642,
+      title: "Chinese Chicken Salad With Chipotle Dressing",
       image: "https://img.spoonacular.com/recipes/663176-312x231.jpg",
       imageType: "jpg",
       myDishType: "desserts",
     },
     {
-      id: 649056,
-      title: "Korean Honey Citron Tea Cheesecake",
+      id: 1096250,
+      title: "Pho With Zucchini Noodles",
       image: "https://img.spoonacular.com/recipes/649056-312x231.jpg",
       imageType: "jpg",
       myDishType: "soups",

@@ -23,7 +23,7 @@ export const RecipeContext = createContext({
 function App() {
   const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
-  const [favoriteRecipes, setFavoriteRecipes] = useState([716311]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
       prevFavorites.filter((recipeID) => recipeID !== id),
