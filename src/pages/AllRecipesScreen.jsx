@@ -1,7 +1,7 @@
 import { RecipeContext } from "../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { idToImage } from "../util/idToImage";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/primatives/Button";
 import SvgFilterList from "../assets/icons/FilterList";
@@ -11,7 +11,16 @@ function AllRecipesScreen() {
   const { data, loading } = useContext(RecipeContext);
   const [sortOpen, setSortOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const { category } = useParams();
   const dishTypes = ["none", "main courses", "soups", "appetizers", "desserts"];
+
+  useEffect(() => {
+    if (category && dishTypes.includes(category)) {
+      setSelected(dishTypes.indexOf(category));
+    }
+  }, [category]);
+
+  console.log({ selected });
 
   const selectedData =
     selected === 0

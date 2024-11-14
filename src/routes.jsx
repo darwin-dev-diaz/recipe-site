@@ -12,6 +12,7 @@ const routes = [
     children: [
       { index: true, element: <HomeScreen /> },
       { path: "allrecipes", element: <AllRecipesScreen /> },
+      { path: "allrecipes/:category", element: <AllRecipesScreen /> },
       { path: "recipe/:recipeID", element: <RecipeScreen /> },
       { path: "favorites", element: <FavoritesScreen /> },
       { path: "plan", element: <MonthlyPlanScreen /> },

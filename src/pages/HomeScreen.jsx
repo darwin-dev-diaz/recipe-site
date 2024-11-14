@@ -10,7 +10,7 @@ import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
 
 function HomeScreen() {
-  const {latestRecipes, featuredRecipes } = useContext(RecipeContext);
+  const { latestRecipes, featuredRecipes } = useContext(RecipeContext);
 
   return (
     <div className="px-6">
@@ -58,33 +58,23 @@ function HomeScreen() {
           <RecipeDisplayCircle
             image={idToImage(716364)}
             title="entrée"
-            to="/allrecipes/main%20course"
+            to="/allrecipes/main%20courses"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
             image={idToImage(638717)}
             title="dessert"
-            to="/allrecipes/dessert"
+            to="/allrecipes/desserts"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
             image={idToImage(642129)}
-            title="snacks"
-            to="/allrecipes/snacks"
+            title="appetizers"
+            to="/allrecipes/appetizers"
           ></RecipeDisplayCircle>
           <RecipeDisplayCircle
             image={idToImage(1096250)}
             title="soups"
             to="/allrecipes/soups"
-          ></RecipeDisplayCircle>
-          <RecipeDisplayCircle
-            image={idToImage(665379)}
-            title="appetizer"
-            to="/allrecipes/appetizer"
-          ></RecipeDisplayCircle>
-          {/* <RecipeDisplayCircle
-            image={idToImage(660231)}
-            title="Diet"
-            to="/allrecipes/"
-          ></RecipeDisplayCircle> */}
+          ></RecipeDisplayCircle>=
         </div>
       </div>
 
