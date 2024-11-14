@@ -34,18 +34,34 @@ function MobileMenu(props) {
               Most popular
               {favoritesOpen ? (
                 <ul className="flex flex-col gap-3 py-3 pl-3">
-                  <li className="text-[1rem] font-semibold uppercase">
-                    Pumpkin Pasta
-                  </li>
-                  <li className="text-[1rem] font-semibold uppercase">
-                    Pumpkin Noodles
-                  </li>
-                  <li className="text-[1rem] font-semibold uppercase">
-                    Pumpkin Steak
-                  </li>
-                  <li className="text-[1rem] font-semibold uppercase">
-                    Pumpkin Beef
-                  </li>
+                  <Link
+                    onClick={props.closeMenu}
+                    to="/recipe/638642"
+                    className="text-[1rem] font-semibold uppercase"
+                  >
+                    Chinese Chicken Salad
+                  </Link>
+                  <Link
+                    onClick={props.closeMenu}
+                    to="/recipe/1096250"
+                    className="text-[1rem] font-semibold uppercase"
+                  >
+                    Pho With Zucchini Noodles
+                  </Link>
+                  <Link
+                    onClick={props.closeMenu}
+                    to="/recipe/638717"
+                    className="text-[1rem] font-semibold uppercase"
+                  >
+                    Chinese Steamed Flan
+                  </Link>
+                  <Link
+                    onClick={props.closeMenu}
+                    to="/recipe/660290"
+                    className="text-[1rem] font-semibold uppercase"
+                  >
+                    Slow Cooker Lamb Curry
+                  </Link>
                 </ul>
               ) : null}
             </li>
