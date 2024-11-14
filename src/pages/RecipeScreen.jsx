@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
+import fetchRecipeData from "../util/fetchRecipeData";
 
 import Button from "../components/primatives/Button";
 import SvgDownArrow from "../assets/icons/DownArrow";
@@ -13,27 +14,40 @@ function RecipeScreen() {
     useContext(RecipeContext);
   const { recipeID } = useParams();
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
-  console.log({ isFavorite, favoriteRecipes, recipeID });
-  const recipeData = expandedData[recipeID];
 
-  // TODO: fetch data from API if data not in expandedData
-  // when i comment out the state and effect and use this ^ instead, all works fine
+  // Initial state as null or an empty object to prevent undefined errors
+  const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // const [recipeData, setRecipeData] = useState(expandedData[0]);
-  // useEffect(() => {
-  //   console.log("JUST PRINT OUT LITERALLY ANYTHING");
-  // }, []);
+  useEffect(() => {
+    const fetch = async () => {
+      await fetchRecipeData(
+        recipeID,
+        false,
+        setRecipeData,
+        setLoading,
+        setError,
+      );
+    };
 
-  // console.log(expandedData);
+    if (!recipeData) {
+      fetch();
+    }
+  }, [expandedData, recipeID, recipeData]);
 
-  // split the instructions into a managable list
-  const analyzedInstructions = recipeData.analyzedInstructions;
   let stepsArr = [];
-  analyzedInstructions.forEach((block) => {
-    block.name && stepsArr.push(block.name);
-    if (block.steps.length)
-      stepsArr = stepsArr.concat(block.steps.map((stepObj) => stepObj.step));
-  });
+  if (recipeData) {
+    const analyzedInstructions = recipeData
+      ? recipeData.analyzedInstructions
+      : [];
+
+    analyzedInstructions.forEach((block) => {
+      block.name && stepsArr.push(block.name);
+      if (block.steps.length)
+        stepsArr = stepsArr.concat(block.steps.map((stepObj) => stepObj.step));
+    });
+  }
 
   const scrollToRecipe = (offset) => {
     const recipe = document.getElementById("recipe");
@@ -47,21 +61,29 @@ function RecipeScreen() {
   };
 
   return (
-    <>
+    <div>
       {/* top section start */}
       <div className="section px-6">
         <h1 className="mt-10 text-3xl font-extrabold uppercase">
-          {recipeData.title}
+          {loading ? "Loading" : recipeData.title}
         </h1>
         <p className="mb-6 font-semibold text-dark-light-grey">
-          {`${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / ${Math.round(recipeData.nutrition.nutrients[10].amount)}g Protien`}
+          {loading
+            ? "Loading"
+            : `${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / ${Math.round(recipeData.nutrition.nutrients[10].amount)}g Protien`}
         </p>
 
         <p
           className="line mb-5 uppercase leading-6"
-          dangerouslySetInnerHTML={{
-            __html: recipeData.summary,
-          }}
+          dangerouslySetInnerHTML={
+            loading
+              ? {
+                  __html: "Loading",
+                }
+              : {
+                  __html: recipeData.summary,
+                }
+          }
         ></p>
         <Button
           width="w-full"
@@ -111,7 +133,7 @@ function RecipeScreen() {
           style={{ backgroundImage: `url(${idToImage(recipeID)})` }}
         ></div>
         <h3 className="tracking mb-12 text-center text-2xl font-extrabold">
-          {recipeData.title}
+          {loading ? "Loading" : recipeData.title}
         </h3>
         <div className="mx-auto flex">
           <SvgStar fill="#F2B955"></SvgStar>
@@ -120,10 +142,18 @@ function RecipeScreen() {
           <SvgStar fill="#F2B955"></SvgStar>
           <SvgStar fill="#F2B955"></SvgStar>
         </div>
-        <span>{`${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / serving`}</span>
+        <span>
+          {loading
+            ? "Loading"
+            : `${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / serving`}
+        </span>
         <div className="flex gap-4">
-          <span>Ready in: {recipeData.readyInMinutes} MINS</span>
-          <span>Yields: {recipeData.servings} servings</span>
+          <span>
+            Ready in: {loading ? "Loading" : recipeData.readyInMinutes} MINS
+          </span>
+          <span>
+            Yields: {loading ? "Loading" : recipeData.servings} servings
+          </span>
         </div>
       </div>
 
@@ -147,11 +177,13 @@ function RecipeScreen() {
         {/* ingredients start */}
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Ingredients</h3>
         <ul className="mb-9 ml-6 flex list-disc flex-col gap-2">
-          {recipeData.nutrition.ingredients.map((ingredient, i) => (
-            <li key={i} className="text-sm font-semibold uppercase">
-              {`${ingredient.amount} ${ingredient.unit} ${ingredient.name}`}
-            </li>
-          ))}
+          {loading
+            ? "Loading"
+            : recipeData.nutrition.ingredients.map((ingredient, i) => (
+                <li key={i} className="text-sm font-semibold uppercase">
+                  {`${ingredient.amount} ${ingredient.unit} ${ingredient.name}`}
+                </li>
+              ))}
         </ul>
         {/* instructions start */}
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Instructions</h3>
@@ -171,7 +203,7 @@ function RecipeScreen() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
