@@ -9,9 +9,14 @@ import SvgFavorite from "../assets/icons/Favorite";
 import SvgStar from "../assets/icons/Star";
 
 function RecipeScreen() {
-  const { expandedData } = useContext(RecipeContext);
+  const { expandedData, favoriteRecipes, removeFavorite, addFavorite } =
+    useContext(RecipeContext);
   const { recipeID } = useParams();
+  const isFavorite = favoriteRecipes.includes(Number(recipeID));
+  console.log({ isFavorite, favoriteRecipes, recipeID });
   const recipeData = expandedData[recipeID];
+
+  // TODO: fetch data from API if data not in expandedData
   // when i comment out the state and effect and use this ^ instead, all works fine
 
   // const [recipeData, setRecipeData] = useState(expandedData[0]);
@@ -78,12 +83,19 @@ function RecipeScreen() {
           <Button
             width="w-full"
             height="h-[50px]"
-            color="white"
-            textColor="dark-grey"
-            text="Favorite this recipe"
+            color={isFavorite ? "black" : "white"}
+            textColor={isFavorite ? "white" : "dark-grey"}
+            text={
+              isFavorite ? "Un-favorite this recipe" : "Favorite this recipe"
+            }
             extraCss="mx-auto border-black border-4 mb-36"
+            onClick={
+              isFavorite
+                ? () => removeFavorite(Number(recipeID))
+                : () => addFavorite(Number(recipeID))
+            }
           >
-            <SvgFavorite color="black"></SvgFavorite>
+            <SvgFavorite color={isFavorite ? "white" : "black"}></SvgFavorite>
           </Button>
         </div>
       </div>
@@ -119,12 +131,17 @@ function RecipeScreen() {
         <Button
           width="w-full"
           height="h-[50px]"
-          color="white"
-          textColor="dark-grey"
-          text="Favorite this recipe"
-          extraCss="mx-auto border-black border-4 mb-14 mt-4"
+          color={isFavorite ? "black" : "white"}
+          textColor={isFavorite ? "white" : "dark-grey"}
+          text={isFavorite ? "Un-favorite this recipe" : "Favorite this recipe"}
+          extraCss={`mx-auto border-black border-4 mb-14 mt-4`}
+          onClick={
+            isFavorite
+              ? () => removeFavorite(Number(recipeID))
+              : () => addFavorite(Number(recipeID))
+          }
         >
-          <SvgFavorite color="black"></SvgFavorite>
+          <SvgFavorite color={isFavorite ? "white" : "black"}></SvgFavorite>
         </Button>
 
         {/* ingredients start */}

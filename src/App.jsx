@@ -17,16 +17,20 @@ export const RecipeContext = createContext({
   latestRecipes: [],
   featuredRecipes: [],
   removeFavorite: () => {},
+  addFavorite: () => {},
 });
 
 function App() {
   const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
-  const [favoriteRecipes, setFavoriteRecipes] = useState([641111]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([716311]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
       prevFavorites.filter((recipeID) => recipeID !== id),
     );
+  };
+  const addFavorite = (id) => {
+    setFavoriteRecipes((prevFavorites) => prevFavorites.concat([id]));
   };
 
   // set the latestRecipes and populate expandedData
@@ -60,6 +64,7 @@ function App() {
         latestRecipes,
         featuredRecipes,
         removeFavorite,
+        addFavorite,
       }}
     >
       <ScrollToTop />
