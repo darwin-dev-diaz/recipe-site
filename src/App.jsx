@@ -16,7 +16,7 @@ export const RecipeContext = createContext({
   favoriteRecipes: [],
   latestRecipes: [],
   featuredRecipes: [],
-  removeRecipe: () => {},
+  removeFavorite: () => {},
 });
 
 function App() {
@@ -24,12 +24,9 @@ function App() {
   const [expandedData, setExpandedData] = useState({});
   const [favoriteRecipes, setFavoriteRecipes] = useState([641111]);
   const removeFavorite = (id) => {
-
-    const newFavoriteRecipes = favoriteRecipes;
-    const removeIndex = newFavoriteRecipes.indexOf(id);
-    newFavoriteRecipes.splice(removeIndex, 1);
-    console.log({newFavoriteRecipes})
-    setFavoriteRecipes(newFavoriteRecipes);
+    setFavoriteRecipes((prevFavorites) =>
+      prevFavorites.filter((recipeID) => recipeID !== id),
+    );
   };
 
   // set the latestRecipes and populate expandedData

@@ -26,6 +26,7 @@ function RemoveableRecipe(props) {
           extraCss="mx-auto mb-2"
         ></Button>
       </Link>
+
       <Button
         width="w-full"
         height="h-[50px]"
@@ -33,7 +34,10 @@ function RemoveableRecipe(props) {
         textColor="white"
         text="remove"
         extraCss="mx-auto"
-        onClick={() => removeFavorite(props.id)}
+        onClick={() => {
+          removeFavorite(props.id);
+          window.scrollTo(0, 0);
+        }}
       ></Button>
     </div>
   );

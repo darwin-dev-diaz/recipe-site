@@ -3,10 +3,11 @@ import { RecipeContext } from "../App";
 import { useContext } from "react";
 import { idToImage } from "../util/idToImage";
 
+function FavoritesScreen() {
+  const { favoriteRecipes, expandedData, loading, removeFavorite } =
+    useContext(RecipeContext);
 
-function FavoritesScreen(props) {
-  const { favoriteRecipes, expandedData, loading } = useContext(RecipeContext);
-  console.log({ favoriteRecipes, loading });
+  console.log({ favoriteRecipes });
 
   return (
     <div className="px-6">
@@ -29,11 +30,10 @@ function FavoritesScreen(props) {
                 ></RemoveableRecipe>
               );
             })
-          : "no favs yet"}
+          : "No favorites yet"}
       </div>
     </div>
   );
 }
-
 
 export default FavoritesScreen;
