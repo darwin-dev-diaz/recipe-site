@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
 import fetchRecipeData from "../util/fetchRecipeData";
+import Loading from "../components/primatives/Loading";
 
 import Button from "../components/primatives/Button";
 import SvgDownArrow from "../assets/icons/DownArrow";
@@ -79,6 +80,7 @@ function RecipeScreen() {
     });
   };
 
+  if (loading) return <Loading />;
   return (
     <div>
       {/* top section start */}

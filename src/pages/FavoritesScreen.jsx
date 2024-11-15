@@ -2,12 +2,12 @@ import RemoveableRecipe from "../components/RemoveableRecipe";
 import { RecipeContext } from "../App";
 import { useContext } from "react";
 import { idToImage } from "../util/idToImage";
+import Loading from "../components/primatives/Loading";
 
 function FavoritesScreen() {
-  const { favoriteRecipes, expandedData, loading, removeFavorite } =
-    useContext(RecipeContext);
+  const { favoriteRecipes, expandedData, loading } = useContext(RecipeContext);
 
-  console.log({ favoriteRecipes });
+  if (loading) return <Loading />;
 
   return (
     <div className="px-6">

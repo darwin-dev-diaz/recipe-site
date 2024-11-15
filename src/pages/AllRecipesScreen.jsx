@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { idToImage } from "../util/idToImage";
 import { useState } from "react";
+import Loading from "../components/primatives/Loading";
 import Button from "../components/primatives/Button";
 import SvgFilterList from "../assets/icons/FilterList";
 import AllRecipesRecipe from "../components/AllRecipesRecipe";
@@ -20,13 +21,12 @@ function AllRecipesScreen() {
     }
   }, [category]);
 
-  console.log({ selected });
-
   const selectedData =
     selected === 0
       ? data
       : data.filter((recipe) => recipe.myDishType === dishTypes[selected]);
 
+  if (loading) return <Loading />;
   return (
     <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
