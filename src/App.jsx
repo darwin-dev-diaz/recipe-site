@@ -19,14 +19,20 @@ export const RecipeContext = createContext({
   featuredRecipes: [],
   removeFavorite: () => {},
   addFavorite: () => {},
+  planner: {},
+  addToPlanner: () => {},
+  removeFromPlanner: () => {},
 });
 
 function App() {
+  // data and expandedDataStuff
   const { data, error, loading } = useData(true);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));
   };
+
+  // favorite recipe stuff
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
@@ -35,6 +41,25 @@ function App() {
   };
   const addFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) => prevFavorites.concat([id]));
+  };
+
+  // planner stuff
+  const [planner, setPlanner] = useState({
+    "1nov2024": { b: 641111, l: 641908, d: 1096250 },
+  });
+  const addToPlanner = (plannerID, mealID, meal) => {
+    setPlanner((prevPlanner) => ({
+      ...prevPlanner,
+      [plannerID]: { ...prevPlanner[plannerID], [meal]: mealID },
+    }));
+  };
+  const removeFromPlanner = (plannerID, meal) => {
+    // if removing the last mealID, remove the whole planner id
+    // if removing but there are other mealIDs
+    setPlanner((prevPlanner) => ({
+      ...prevPlanner,
+      [plannerID]: { ...prevPlanner[plannerID], [meal]: null },
+    }));
   };
 
   // set the latestRecipes and populate expandedData
@@ -70,6 +95,9 @@ function App() {
         featuredRecipes,
         removeFavorite,
         addFavorite,
+        planner,
+        addToPlanner,
+        removeFromPlanner,
       }}
     >
       <ScrollToTop />

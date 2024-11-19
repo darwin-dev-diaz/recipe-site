@@ -2,9 +2,13 @@ import SvgArrowLeft from "../assets/icons/ArrowLeft";
 import SvgArrowRight from "../assets/icons/ArrowRight";
 import RemoveableRecipe from "../components/RemoveableRecipe";
 import image from "../assets/images/pancake.jpg";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { RecipeContext } from "../App";
 
 function MonthlyPlanScreen() {
+  const { planner, removeFromPlanner } = useContext(RecipeContext);
+
+  console.log({ planner, removeFromPlanner });
   const today = new Date();
   const months = [
     "January",
@@ -32,15 +36,8 @@ function MonthlyPlanScreen() {
   const getMonthInfo = (y, m) => {
     const numDays = new Date(y, m, 0).getDate();
     const startDate = new Date(y, m - 1).getDay() + 1;
-    console.log(new Date(y, m - 1));
-    console.log({ startDate });
     return { numDays, startDate };
   };
-
-  // console.log({
-  //   selectedDate,
-  //   startDay: getMonthInfo(selectedDate.year, selectedDate.month).startDate,
-  // });
   const styles = {
     selectedStylesItem: {
       borderRadius: "0.5rem",
