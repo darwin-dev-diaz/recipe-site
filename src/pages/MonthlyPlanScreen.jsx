@@ -23,7 +23,6 @@ function MonthlyPlanScreen() {
   const todaysYear = today.getFullYear();
   const todaysMonth = today.getMonth() + 1;
   const todaysDay = today.getDate();
-
   const [selectedDate, setSelectedDate] = useState({
     month: todaysMonth,
     day: todaysDay,
@@ -78,8 +77,11 @@ function MonthlyPlanScreen() {
             (_, i) => i + 1,
           ).map((i) => (
             <div
+              onClick={() => {
+                setSelectedDate((prev) => ({ ...prev, day: i }));
+              }}
               key={i}
-              className="flex h-12 w-10 flex-col items-center justify-center"
+              className="flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
               style={
                 ({
                   gridColumnStart: `${i === 1 ? startDay : ""}`,
