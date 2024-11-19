@@ -69,14 +69,26 @@ function MonthlyPlanScreen() {
               year: lastMonth.getFullYear(),
             });
           }}
-          className="h-10 w-10"
+          className="h-10 w-10 cursor-pointer"
         ></SvgArrowLeft>
         <div className="z-40 mx-auto flex h-12 w-full max-w-96 items-center bg-orange">
           <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
             {`${months[selectedDate.month - 1]}, ${selectedDate.year}`}
           </h2>
         </div>
-        <SvgArrowRight className="h-10 w-10"></SvgArrowRight>
+        <SvgArrowRight
+          onClick={() => {
+            const date = new Date(selectedDate.year, selectedDate.month - 1);
+            const nextMonth = new Date(date.getFullYear(), date.getMonth() + 1);
+            nextMonth.setDate(1);
+            setSelectedDate({
+              month: nextMonth.getMonth() + 1,
+              day: 1,
+              year: nextMonth.getFullYear(),
+            });
+          }}
+          className="h-10 w-10 cursor-pointer"
+        ></SvgArrowRight>
       </div>
       <div className="mb-20 px-0">
         <div className="grid h-auto grid-cols-7 grid-rows-[auto] items-center justify-items-center bg-white px-7">
@@ -106,9 +118,10 @@ function MonthlyPlanScreen() {
                     className="here flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
                     style={{
                       ...style,
-                      gridColumnStart:
-                        getMonthInfo(selectedDate.year, selectedDate.month)
-                          .startDate ,
+                      gridColumnStart: getMonthInfo(
+                        selectedDate.year,
+                        selectedDate.month,
+                      ).startDate,
                     }}
                   >
                     <span
