@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import Button from "./primatives/Button";
 import { Link } from "react-router-dom";
-
-import { RecipeContext } from "../App";
-import { useContext } from "react";
 function RemoveableRecipe(props) {
-  const { removeFavorite } = useContext(RecipeContext);
   return (
     <div className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col place-self-center justify-self-center">
       <div

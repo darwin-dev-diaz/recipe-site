@@ -2,7 +2,6 @@
 import SvgArrowLeft from "../assets/icons/ArrowLeft";
 import SvgArrowRight from "../assets/icons/ArrowRight";
 import RemoveableRecipe from "../components/RemoveableRecipe";
-import image from "../assets/images/pancake.jpg";
 import { useState, useContext } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
@@ -11,6 +10,8 @@ function MonthlyPlanScreen() {
   const { planner, removeFromPlanner, expandedData } =
     useContext(RecipeContext);
 
+
+    console.log(planner)
   const today = new Date();
   const months = [
     "January",
@@ -41,6 +42,12 @@ function MonthlyPlanScreen() {
     return { numDays, startDate };
   };
   const getDayAsPlannerKey = (y, m, d) => `${d}${m}${y}`;
+  const selectedPlanAsKey = getDayAsPlannerKey(
+    selectedDate.year,
+    months[selectedDate.month - 1],
+    selectedDate.day,
+  );
+  const selectedPlan = planner[selectedPlanAsKey];
   const styles = {
     selectedStylesItem: {
       borderRadius: "0.5rem",
@@ -54,15 +61,6 @@ function MonthlyPlanScreen() {
         .startDate,
     },
   };
-
-  const selectedPlan =
-    planner[
-      getDayAsPlannerKey(
-        selectedDate.year,
-        months[selectedDate.month - 1],
-        selectedDate.day,
-      )
-    ];
   return (
     <>
       <div className="mb-8 mt-4 flex items-center justify-center">
@@ -219,7 +217,9 @@ function MonthlyPlanScreen() {
         <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
           {Object.entries(selectedPlan).map(([meal, recipeID], iii) => {
             const title = expandedData[recipeID].title;
-
+            const removeFromPlannerClick = () => {
+              removeFromPlanner(selectedPlanAsKey, meal);
+            };
             return (
               <div key={iii}>
                 <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
@@ -228,6 +228,7 @@ function MonthlyPlanScreen() {
                   to={`/recipe/${recipeID}`}
                   id={recipeID}
                   image={idToImage(recipeID)}
+                  onClick={removeFromPlannerClick}
                 ></RemoveableRecipe>
               </div>
             );

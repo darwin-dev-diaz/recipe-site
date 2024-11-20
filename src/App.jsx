@@ -46,7 +46,7 @@ function App() {
   // planner stuff
   const [planner, setPlanner] = useState({
     "1November2024": { breakfast: 641111, lunch: 641908, dinner: 1096250 },
-    "2November2024": { breakfast: 641111, lunch: 641908, },
+    "2November2024": { breakfast: 641111, lunch: 641908 },
   });
   const addToPlanner = (plannerID, mealID, meal) => {
     setPlanner((prevPlanner) => ({
@@ -55,12 +55,17 @@ function App() {
     }));
   };
   const removeFromPlanner = (plannerID, meal) => {
-    // if removing the last mealID, remove the whole planner id
     // if removing but there are other mealIDs
-    setPlanner((prevPlanner) => ({
-      ...prevPlanner,
-      [plannerID]: { ...prevPlanner[plannerID], [meal]: null },
-    }));
+    if (Object.keys(planner[plannerID]).length > 1) {
+      const newPlanner = planner;
+      delete newPlanner[plannerID][meal];
+      setPlanner(() => ({ ...newPlanner }));
+    } else {
+      // if removing the last mealID, remove the whole planner id
+      const newPlanner = planner;
+      delete newPlanner[plannerID];
+      setPlanner(() => ({ ...newPlanner }));
+    }
   };
 
   // set the latestRecipes and populate expandedData
