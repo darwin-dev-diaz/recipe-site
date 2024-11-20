@@ -34,20 +34,24 @@ function Header() {
         <SvgSkillet height="40" width="40" fill="white"></SvgSkillet>
         Skillpot
       </Link>
-      <IconButton
-        aria-label="Search"
-        cssobj={searchOpen ? { backgroundColor: "var(--orange)" } : {}}
-        onClick={searchOpen ? () => handleSubmit() : () => setSearchOpen(true)}
-      >
-        <SvgSearch></SvgSearch>
-      </IconButton>
+      <div className="z-40">
+        <IconButton
+          aria-label="Search"
+          cssobj={searchOpen ? { backgroundColor: "var(--orange)" } : {}}
+          onClick={
+            searchOpen ? () => handleSubmit() : () => setSearchOpen(true)
+          }
+        >
+          <SvgSearch></SvgSearch>
+        </IconButton>
+      </div>
+
       {mobileMenuOpen ? (
         <MobileMenu closeMenu={() => setMobileMenuOpen(false)}></MobileMenu>
       ) : null}
 
-      {searchOpen ? null : null}
       <div
-        className={`absolute ${searchOpen ? "left-0" : "left-[-100%]"} top-0 flex h-full w-full`}
+        className={`absolute ${searchOpen ? "left-0" : "left-[-100%]"} top-0 z-40 flex h-full w-full`}
         style={{
           width: "calc(100% - 64px)",
           transition: "left 0.3s ease-in-out",
@@ -69,6 +73,15 @@ function Header() {
           />
         </form>
       </div>
+
+      <div
+        className={`absolute ${
+          searchOpen ? "translate-y-0" : "translate-y-full"
+        } top-0 z-10 h-screen w-full bg-black opacity-50`}
+        style={{
+          transition: "transform 0.3s ease-in-out",
+        }}
+      ></div>
     </header>
   );
 }
