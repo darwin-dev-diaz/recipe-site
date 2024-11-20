@@ -11,6 +11,7 @@ function IconButton(props) {
     <button
       {...props}
       className="flex content-center bg-[var(--black)] p-3 text-white"
+      style={props.cssobj ? props.cssobj : {}}
     >
       {clonedElement}
     </button>
@@ -20,6 +21,7 @@ function IconButton(props) {
 IconButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
+  cssobj: PropTypes.object,
 };
 
 export default IconButton;

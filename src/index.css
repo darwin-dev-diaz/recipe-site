@@ -71,3 +71,18 @@
     calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * -0.3827) 0
       var(--stroke-color);
 }
+
+.mobileSearch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(100% - 64px);
+  background-color: #bfdbfe; /* blue-200 */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobileSearch.open {
+  transform: translateX(0);
+}
