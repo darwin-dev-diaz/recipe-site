@@ -8,10 +8,12 @@ import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
 import Button from "../components/primatives/Button";
 import SvgAdd from "../assets/icons/Add";
+import Loading from "../components/primatives/Loading";
 
 function HomeScreen() {
-  const { latestRecipes, featuredRecipes } = useContext(RecipeContext);
+  const { latestRecipes, featuredRecipes, loading } = useContext(RecipeContext);
 
+  if (loading) return <Loading />;
   return (
     <div className="px-6">
       <div className="section mb-16">
@@ -74,7 +76,8 @@ function HomeScreen() {
             image={idToImage(1096250)}
             title="soups"
             to="/allrecipes/soups"
-          ></RecipeDisplayCircle>=
+          ></RecipeDisplayCircle>
+          =
         </div>
       </div>
 

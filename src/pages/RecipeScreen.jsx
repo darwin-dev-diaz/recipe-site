@@ -27,6 +27,7 @@ function RecipeScreen() {
     addToPlanner,
   } = useContext(RecipeContext);
   const { recipeID } = useParams();
+  console.log({ recipeID });
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
   const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -56,6 +57,9 @@ function RecipeScreen() {
   const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // reset states because component doesn't unmount on parameter change
+ 
 
   // for disabling loading if recipe is already in expandedRecipes
   useEffect(() => {

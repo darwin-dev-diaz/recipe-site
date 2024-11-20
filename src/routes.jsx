@@ -4,6 +4,7 @@ import AllRecipesScreen from "./pages/AllRecipesScreen.jsx";
 import RecipeScreen from "./pages/RecipeScreen.jsx";
 import FavoritesScreen from "./pages/FavoritesScreen.jsx";
 import MonthlyPlanScreen from "./pages/MonthlyPlanScreen.jsx";
+import RecipeScreenWrapper from "./util/RecipeScreenWrapper.jsx";
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
       { index: true, element: <HomeScreen /> },
       { path: "allrecipes", element: <AllRecipesScreen /> },
       { path: "allrecipes/:category", element: <AllRecipesScreen /> },
-      { path: "recipe/:recipeID", element: <RecipeScreen /> },
+      { path: "recipe/:recipeID", element: <RecipeScreenWrapper /> },
       { path: "favorites", element: <FavoritesScreen /> },
       { path: "plan", element: <MonthlyPlanScreen /> },
 
