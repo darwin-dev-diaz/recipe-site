@@ -48,7 +48,7 @@ function App() {
     "1November2024": { breakfast: 641111, lunch: 641908, dinner: 1096250 },
     "2November2024": { breakfast: 641111, lunch: 641908 },
   });
-  const addToPlanner = (plannerID, mealID, meal) => {
+  const addToPlanner = (plannerID, meal, mealID) => {
     setPlanner((prevPlanner) => ({
       ...prevPlanner,
       [plannerID]: { ...prevPlanner[plannerID], [meal]: mealID },

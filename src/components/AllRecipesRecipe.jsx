@@ -3,7 +3,10 @@ import Button from "./primatives/Button";
 import { Link } from "react-router-dom";
 function AllRecipesRecipe(props) {
   return (
-    <div className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col justify-between place-self-center justify-self-center">
+    <div
+      className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col justify-between place-self-center justify-self-center"
+      style={props.cssObj ? props.cssObj : {}}
+    >
       <div
         className="h-[21rem] w-full self-center bg-black bg-cover bg-center"
         style={{ backgroundImage: `url(${props.image})` }}
@@ -11,9 +14,6 @@ function AllRecipesRecipe(props) {
       <span className="my-3 text-center text-xl font-extrabold uppercase">
         {props.title}
       </span>
-      {/* <span className="text-sm font-semibold uppercase text-dark-light-grey">
-        $5.00 Recipe / $0.50 Serving
-      </span> */}
       <Link to={props.to ? props.to : null}>
         <Button
           width="w-full"
@@ -36,5 +36,6 @@ AllRecipesRecipe.propTypes = {
   buttonColor: PropTypes.string,
   buttonText: PropTypes.string,
   onClick: PropTypes.func,
+  cssObj: PropTypes.object,
 };
 export default AllRecipesRecipe;

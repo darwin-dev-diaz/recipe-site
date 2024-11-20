@@ -174,7 +174,7 @@ function RecipeScreen() {
             height="h-[50px]"
             color={calendarOpen ? "black" : "white"}
             textColor={calendarOpen ? "white" : "dark-grey"}
-            text="Close Plan recipe"
+            text={calendarOpen ? "Close Plan Recipe" : "Plan Recipe"}
             extraCss={`mx-auto border-black border-4 ${calendarOpen ? "" : "mb-36"}`}
             onClick={() => setCalendarOpen(!calendarOpen)}
           >
@@ -223,7 +223,12 @@ function RecipeScreen() {
                                     meal,
                                     mealID,
                                   )
-                              : () => console.log("no plan")
+                              : () =>
+                                  addToPlanner(
+                                    selectedPlanAsKey,
+                                    meal,
+                                    recipeID,
+                                  )
                           }
                         ></AllRecipesRecipe>
                       </div>
