@@ -34,10 +34,7 @@ function RemoveableRecipe(props) {
         textColor="white"
         text="remove"
         extraCss="mx-auto"
-        onClick={() => {
-          removeFavorite(props.id);
-          window.scrollTo(0, 0);
-        }}
+        onClick={props.onClick}
       ></Button>
     </div>
   );
@@ -50,5 +47,6 @@ RemoveableRecipe.propTypes = {
   subtitle: PropTypes.string,
   to: PropTypes.string,
   removeFavorite: PropTypes.func,
+  onClick: PropTypes.func,
 };
 export default RemoveableRecipe;

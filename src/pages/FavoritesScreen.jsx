@@ -5,7 +5,8 @@ import { idToImage } from "../util/idToImage";
 import Loading from "../components/primatives/Loading";
 
 function FavoritesScreen() {
-  const { favoriteRecipes, expandedData, loading } = useContext(RecipeContext);
+  const { favoriteRecipes, expandedData, loading, removeFavorite } =
+    useContext(RecipeContext);
 
   if (loading) return <Loading />;
 
@@ -20,6 +21,10 @@ function FavoritesScreen() {
         {favoriteRecipes.length
           ? favoriteRecipes.map((recipeID, i) => {
               const title = expandedData[recipeID].title;
+              const removeFavoriteClick = () => {
+                removeFavorite(recipeID);
+                window.scrollTo(0, 0);
+              };
               return (
                 <RemoveableRecipe
                   title={title}
@@ -27,6 +32,7 @@ function FavoritesScreen() {
                   to={`/recipe/${recipeID}`}
                   id={recipeID}
                   image={idToImage(recipeID)}
+                  onClick={removeFavoriteClick}
                 ></RemoveableRecipe>
               );
             })
