@@ -1,14 +1,16 @@
+/* eslint-disable no-extra-boolean-cast */
 import SvgArrowLeft from "../assets/icons/ArrowLeft";
 import SvgArrowRight from "../assets/icons/ArrowRight";
 import RemoveableRecipe from "../components/RemoveableRecipe";
 import image from "../assets/images/pancake.jpg";
 import { useState, useContext } from "react";
 import { RecipeContext } from "../App";
+import { idToImage } from "../util/idToImage";
 
 function MonthlyPlanScreen() {
-  const { planner, removeFromPlanner } = useContext(RecipeContext);
+  const { planner, removeFromPlanner, expandedData } =
+    useContext(RecipeContext);
 
-  console.log({ planner, removeFromPlanner });
   const today = new Date();
   const months = [
     "January",
@@ -38,6 +40,7 @@ function MonthlyPlanScreen() {
     const startDate = new Date(y, m - 1).getDay() + 1;
     return { numDays, startDate };
   };
+  const getDayAsPlannerKey = (y, m, d) => `${d}${m}${y}`;
   const styles = {
     selectedStylesItem: {
       borderRadius: "0.5rem",
@@ -52,6 +55,14 @@ function MonthlyPlanScreen() {
     },
   };
 
+  const selectedPlan =
+    planner[
+      getDayAsPlannerKey(
+        selectedDate.year,
+        months[selectedDate.month - 1],
+        selectedDate.day,
+      )
+    ];
   return (
     <>
       <div className="mb-8 mt-4 flex items-center justify-center">
@@ -102,6 +113,15 @@ function MonthlyPlanScreen() {
             { length: getMonthInfo(todaysYear, todaysMonth).numDays },
             (_, i) => i + 1,
           ).map((i) => {
+            const plan =
+              planner[
+                getDayAsPlannerKey(
+                  selectedDate.year,
+                  months[selectedDate.month - 1],
+                  i,
+                )
+              ];
+
             let style;
             switch (true) {
               case i === 1 && selectedDate.day === 1:
@@ -112,7 +132,7 @@ function MonthlyPlanScreen() {
                       setSelectedDate((prev) => ({ ...prev, day: i }));
                     }}
                     key={i}
-                    className="here flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
+                    className="flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
                     style={{
                       ...style,
                       gridColumnStart: getMonthInfo(
@@ -128,17 +148,19 @@ function MonthlyPlanScreen() {
                       {i}
                     </span>
                     <div className="flex h-[10px] gap-1">
-                      {Array.from(Array(i % 3).keys()).map((x) => (
-                        <div
-                          key={x}
-                          className="h-[10px] w-[10px] rounded-full bg-black"
-                          style={
-                            i === selectedDate.day
-                              ? styles.selectedStylesDot
-                              : null
-                          }
-                        ></div>
-                      ))}
+                      {!!plan
+                        ? Object.keys(plan).map((entry, ii) => (
+                            <div
+                              key={ii}
+                              className="h-[10px] w-[10px] rounded-full bg-black"
+                              style={
+                                1 === selectedDate.day
+                                  ? styles.selectedStylesDot
+                                  : null
+                              }
+                            ></div>
+                          ))
+                        : null}
                     </div>
                   </div>
                 );
@@ -157,7 +179,7 @@ function MonthlyPlanScreen() {
                   setSelectedDate((prev) => ({ ...prev, day: i }));
                 }}
                 key={i}
-                className="here flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
+                className="flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
                 style={style}
               >
                 <span
@@ -169,15 +191,19 @@ function MonthlyPlanScreen() {
                   {i}
                 </span>
                 <div className="flex h-[10px] gap-1">
-                  {Array.from(Array(i % 3).keys()).map((x) => (
-                    <div
-                      key={x}
-                      className="h-[10px] w-[10px] rounded-full bg-black"
-                      style={
-                        i === selectedDate.day ? styles.selectedStylesDot : null
-                      }
-                    ></div>
-                  ))}
+                  {plan
+                    ? Object.keys(plan).map((x) => (
+                        <div
+                          key={x}
+                          className="h-[10px] w-[10px] rounded-full bg-black"
+                          style={
+                            i === selectedDate.day
+                              ? styles.selectedStylesDot
+                              : null
+                          }
+                        ></div>
+                      ))
+                    : null}
                 </div>
               </div>
             );
@@ -189,21 +215,27 @@ function MonthlyPlanScreen() {
         {`${months[selectedDate.month - 1]} ${selectedDate.day}, ${selectedDate.year}`}{" "}
         Meal Plan
       </h3>
+      {selectedPlan ? (
+        <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
+          {Object.entries(selectedPlan).map(([meal, recipeID], iii) => {
+            const title = expandedData[recipeID].title;
 
-      <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
-        <div>
-          <p className="mb-2 text-xl font-bold uppercase">Breakfast</p>
-          <RemoveableRecipe image={image}></RemoveableRecipe>
+            return (
+              <div key={iii}>
+                <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
+                <RemoveableRecipe
+                  title={title}
+                  to={`/recipe/${recipeID}`}
+                  id={recipeID}
+                  image={idToImage(recipeID)}
+                ></RemoveableRecipe>
+              </div>
+            );
+          })}
         </div>
-        <div>
-          <p className="mb-2 text-xl font-bold uppercase">Lunch</p>
-          <RemoveableRecipe image={image}></RemoveableRecipe>
-        </div>
-        <div>
-          <p className="mb-2 text-xl font-bold uppercase">Dinner</p>
-          <RemoveableRecipe image={image}></RemoveableRecipe>
-        </div>
-      </div>
+      ) : (
+        "No plans logged"
+      )}
     </>
   );
 }
