@@ -1,10 +1,11 @@
-/* eslint-disable no-extra-boolean-cast */
 import RemoveableRecipe from "../components/RemoveableRecipe";
 import { useState, useContext } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
 import Loading from "../components/primatives/Loading";
 import ScrollableCalendar from "../components/ScrollableCalendar";
+import Button from "../components/primatives/Button";
+import { Link } from "react-router-dom";
 
 function MonthlyPlanScreen() {
   const { planner, removeFromPlanner, expandedData, loading } =
@@ -46,9 +47,9 @@ function MonthlyPlanScreen() {
   return (
     <>
       <ScrollableCalendar
-      setSelectedDate={setSelectedDate}
-      selectedDate={selectedDate}
-      calendarMb="mb-20"
+        setSelectedDate={setSelectedDate}
+        selectedDate={selectedDate}
+        calendarMb="mb-20"
       />
 
       <h3 className="mb-8 px-6 text-center text-3xl font-bold uppercase">
@@ -77,7 +78,21 @@ function MonthlyPlanScreen() {
           })}
         </div>
       ) : (
-        "No plans logged"
+        <div className="w-full">
+          <p className="mx-auto mb-4 text-center text-xl font-bold uppercase text-dark-grey">
+            No recipes planned
+          </p>
+          <Link to="/allrecipes">
+            <Button
+              width="w-fit"
+              height="h-[50px]"
+              color="orange"
+              textColor="white"
+              text="View All Recipes"
+              extraCss="mx-auto mb-10"
+            ></Button>
+          </Link>
+        </div>
       )}
     </>
   );

@@ -1,15 +1,12 @@
 /* eslint-disable no-extra-boolean-cast */
 import SvgArrowLeft from "../assets/icons/ArrowLeft";
 import SvgArrowRight from "../assets/icons/ArrowRight";
-import RemoveableRecipe from "../components/RemoveableRecipe";
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { RecipeContext } from "../App";
-import { idToImage } from "../util/idToImage";
 import PropTypes from "prop-types";
 
 function ScrollableCalendar(props) {
-  const { planner, removeFromPlanner, expandedData } =
-    useContext(RecipeContext);
+  const { planner } = useContext(RecipeContext);
 
   const today = new Date();
   const months = [
