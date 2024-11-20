@@ -5,13 +5,13 @@ import RemoveableRecipe from "../components/RemoveableRecipe";
 import { useState, useContext } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
+import Loading from "../components/primatives/Loading";
 
 function MonthlyPlanScreen() {
-  const { planner, removeFromPlanner, expandedData } =
+  const { planner, removeFromPlanner, expandedData, loading } =
     useContext(RecipeContext);
 
-
-    console.log(planner)
+  console.log(planner);
   const today = new Date();
   const months = [
     "January",
@@ -61,6 +61,8 @@ function MonthlyPlanScreen() {
         .startDate,
     },
   };
+
+  if (loading) return <Loading />;
   return (
     <>
       <div className="mb-8 mt-4 flex items-center justify-center">
