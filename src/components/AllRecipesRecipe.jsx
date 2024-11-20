@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function AllRecipesRecipe(props) {
   return (
     <div
-      className="flex max-h-[28rem] min-h-[28rem] w-[13.5rem] flex-col justify-between place-self-center justify-self-center"
+      className="flex max-h-[28rem] h-[28rem] w-[13.5rem] flex-col justify-between place-self-center justify-self-center"
       style={props.cssObj ? props.cssObj : {}}
     >
       <div

@@ -37,24 +37,12 @@ function ScrollableCalendar(props) {
       year: todaysYear,
     });
   }, []);
-
-  const [selectedDate, setSelectedDate] = useState({
-    month: todaysMonth,
-    day: todaysDay,
-    year: todaysYear,
-  });
   const getMonthInfo = (y, m) => {
     const numDays = new Date(y, m, 0).getDate();
     const startDate = new Date(y, m - 1).getDay() + 1;
     return { numDays, startDate };
   };
   const getDayAsPlannerKey = (y, m, d) => `${d}${m}${y}`;
-  //   const selectedPlanAsKey = getDayAsPlannerKey(
-  //     selectedDate.year,
-  //     months[selectedDate.month - 1],
-  //     selectedDate.day,
-  //   );
-  //   const selectedPlan = planner[selectedPlanAsKey];
   const styles = {
     selectedStylesItem: {
       borderRadius: "0.5rem",
@@ -73,7 +61,7 @@ function ScrollableCalendar(props) {
 
   return (
     <>
-      <div className="mb-8 pt-4 flex items-center justify-center">
+      <div className="mb-8 flex items-center justify-center pt-4">
         <SvgArrowLeft
           onClick={() => {
             const date = new Date(
