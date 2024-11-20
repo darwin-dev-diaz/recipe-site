@@ -2,13 +2,13 @@
 import SvgArrowLeft from "../assets/icons/ArrowLeft";
 import SvgArrowRight from "../assets/icons/ArrowRight";
 import RemoveableRecipe from "../components/RemoveableRecipe";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
-import Loading from "../components/primatives/Loading";
+import PropTypes from "prop-types";
 
-function MonthlyPlanScreen() {
-  const { planner, removeFromPlanner, expandedData, loading } =
+function ScrollableCalendar(props) {
+  const { planner, removeFromPlanner, expandedData } =
     useContext(RecipeContext);
 
   const today = new Date();
@@ -30,6 +30,14 @@ function MonthlyPlanScreen() {
   const todaysYear = today.getFullYear();
   const todaysMonth = today.getMonth() + 1;
   const todaysDay = today.getDate();
+  useEffect(() => {
+    props.setSelectedDate({
+      month: todaysMonth,
+      day: todaysDay,
+      year: todaysYear,
+    });
+  }, []);
+
   const [selectedDate, setSelectedDate] = useState({
     month: todaysMonth,
     day: todaysDay,
@@ -41,12 +49,12 @@ function MonthlyPlanScreen() {
     return { numDays, startDate };
   };
   const getDayAsPlannerKey = (y, m, d) => `${d}${m}${y}`;
-  const selectedPlanAsKey = getDayAsPlannerKey(
-    selectedDate.year,
-    months[selectedDate.month - 1],
-    selectedDate.day,
-  );
-  const selectedPlan = planner[selectedPlanAsKey];
+  //   const selectedPlanAsKey = getDayAsPlannerKey(
+  //     selectedDate.year,
+  //     months[selectedDate.month - 1],
+  //     selectedDate.day,
+  //   );
+  //   const selectedPlan = planner[selectedPlanAsKey];
   const styles = {
     selectedStylesItem: {
       borderRadius: "0.5rem",
@@ -56,21 +64,25 @@ function MonthlyPlanScreen() {
     selectedStylesText: { color: "white" },
     selectedStylesDot: { backgroundColor: "white", color: "white" },
     startDayStyle: {
-      gridColumnStart: getMonthInfo(selectedDate.year, selectedDate.month)
-        .startDate,
+      gridColumnStart: getMonthInfo(
+        props.selectedDate.year,
+        props.selectedDate.month,
+      ).startDate,
     },
   };
 
-  if (loading) return <Loading />;
   return (
     <>
-      <div className="mb-8 mt-4 flex items-center justify-center">
+      <div className="mb-8 pt-4 flex items-center justify-center">
         <SvgArrowLeft
           onClick={() => {
-            const date = new Date(selectedDate.year, selectedDate.month - 1);
+            const date = new Date(
+              props.selectedDate.year,
+              props.selectedDate.month - 1,
+            );
             const lastMonth = new Date(date.getFullYear(), date.getMonth() - 1);
             lastMonth.setDate(1);
-            setSelectedDate({
+            props.setSelectedDate({
               month: lastMonth.getMonth() + 1,
               day: 1,
               year: lastMonth.getFullYear(),
@@ -80,15 +92,18 @@ function MonthlyPlanScreen() {
         ></SvgArrowLeft>
         <div className="z-40 mx-auto flex h-12 w-full max-w-96 items-center bg-orange">
           <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
-            {`${months[selectedDate.month - 1]}, ${selectedDate.year}`}
+            {`${months[props.selectedDate.month - 1]}, ${props.selectedDate.year}`}
           </h2>
         </div>
         <SvgArrowRight
           onClick={() => {
-            const date = new Date(selectedDate.year, selectedDate.month - 1);
+            const date = new Date(
+              props.selectedDate.year,
+              props.selectedDate.month - 1,
+            );
             const nextMonth = new Date(date.getFullYear(), date.getMonth() + 1);
             nextMonth.setDate(1);
-            setSelectedDate({
+            props.setSelectedDate({
               month: nextMonth.getMonth() + 1,
               day: 1,
               year: nextMonth.getFullYear(),
@@ -97,8 +112,10 @@ function MonthlyPlanScreen() {
           className="h-10 w-10 cursor-pointer"
         ></SvgArrowRight>
       </div>
-      <div className="mb-20 px-0">
-        <div className="grid h-auto grid-cols-7 grid-rows-[auto] items-center justify-items-center bg-white px-7">
+      <div className={`${props.calendarMb} px-0`}>
+        <div
+          className={`grid h-auto grid-cols-7 grid-rows-[auto] items-center justify-items-center ${props.weekBGColor} px-7`}
+        >
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
           <span className="row-span-1 mb-4 text-xl font-bold">M</span>
           <span className="row-span-1 mb-4 text-xl font-bold">T</span>
@@ -115,28 +132,28 @@ function MonthlyPlanScreen() {
             const plan =
               planner[
                 getDayAsPlannerKey(
-                  selectedDate.year,
-                  months[selectedDate.month - 1],
+                  props.selectedDate.year,
+                  months[props.selectedDate.month - 1],
                   i,
                 )
               ];
 
             let style;
             switch (true) {
-              case i === 1 && selectedDate.day === 1:
+              case i === 1 && props.selectedDate.day === 1:
                 style = { ...styles.selectedStylesItem };
                 return (
                   <div
                     onClick={() => {
-                      setSelectedDate((prev) => ({ ...prev, day: i }));
+                      props.setSelectedDate((prev) => ({ ...prev, day: i }));
                     }}
                     key={i}
                     className="flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
                     style={{
                       ...style,
                       gridColumnStart: getMonthInfo(
-                        selectedDate.year,
-                        selectedDate.month,
+                        props.selectedDate.year,
+                        props.selectedDate.month,
                       ).startDate,
                     }}
                   >
@@ -153,7 +170,7 @@ function MonthlyPlanScreen() {
                               key={ii}
                               className="h-[10px] w-[10px] rounded-full bg-black"
                               style={
-                                1 === selectedDate.day
+                                1 === props.selectedDate.day
                                   ? styles.selectedStylesDot
                                   : null
                               }
@@ -166,7 +183,7 @@ function MonthlyPlanScreen() {
               case i === 1:
                 style = styles.startDayStyle;
                 break;
-              case i === selectedDate.day:
+              case i === props.selectedDate.day:
                 style = styles.selectedStylesItem;
                 break;
               default:
@@ -175,7 +192,7 @@ function MonthlyPlanScreen() {
             return (
               <div
                 onClick={() => {
-                  setSelectedDate((prev) => ({ ...prev, day: i }));
+                  props.setSelectedDate((prev) => ({ ...prev, day: i }));
                 }}
                 key={i}
                 className="flex h-12 w-10 cursor-pointer flex-col items-center justify-center"
@@ -184,7 +201,9 @@ function MonthlyPlanScreen() {
                 <span
                   className="text-3xl font-bold"
                   style={
-                    i === selectedDate.day ? styles.selectedStylesText : null
+                    i === props.selectedDate.day
+                      ? styles.selectedStylesText
+                      : null
                   }
                 >
                   {i}
@@ -196,7 +215,7 @@ function MonthlyPlanScreen() {
                           key={x}
                           className="h-[10px] w-[10px] rounded-full bg-black"
                           style={
-                            i === selectedDate.day
+                            i === props.selectedDate.day
                               ? styles.selectedStylesDot
                               : null
                           }
@@ -209,37 +228,14 @@ function MonthlyPlanScreen() {
           })}
         </div>
       </div>
-
-      <h3 className="mb-8 px-6 text-center text-3xl font-bold uppercase">
-        {`${months[selectedDate.month - 1]} ${selectedDate.day}, ${selectedDate.year}`}{" "}
-        Meal Plan
-      </h3>
-      {selectedPlan ? (
-        <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
-          {Object.entries(selectedPlan).map(([meal, recipeID], iii) => {
-            const title = expandedData[recipeID].title;
-            const removeFromPlannerClick = () => {
-              removeFromPlanner(selectedPlanAsKey, meal);
-            };
-            return (
-              <div key={iii}>
-                <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
-                <RemoveableRecipe
-                  title={title}
-                  to={`/recipe/${recipeID}`}
-                  id={recipeID}
-                  image={idToImage(recipeID)}
-                  onClick={removeFromPlannerClick}
-                ></RemoveableRecipe>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        "No plans logged"
-      )}
     </>
   );
 }
 
-export default MonthlyPlanScreen;
+ScrollableCalendar.propTypes = {
+  weekBGColor: PropTypes.string,
+  calendarMb: PropTypes.string,
+  selectedDate: PropTypes.object,
+  setSelectedDate: PropTypes.func,
+};
+export default ScrollableCalendar;
