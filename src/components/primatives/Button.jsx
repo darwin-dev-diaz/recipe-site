@@ -11,7 +11,11 @@ function Button(props) {
   return (
     <button
       className={`flex items-center ${props.width ? props.width : "w-full"} ${props.height ? props.height : ""} justify-center gap-2 p-5 text-lg font-bold uppercase text-${props.textColor} ${props.extraCss}`}
-      style={{ backgroundColor: `var(--${props.color}` }}
+      style={
+        props.cssobj
+          ? { ...props.cssobj, backgroundColor: `var(--${props.color}` }
+          : { backgroundColor: `var(--${props.color}` }
+      }
       onClick={props.onClick}
     >
       {svg}
@@ -29,6 +33,7 @@ Button.propTypes = {
   height: PropTypes.string,
   svgWidth: PropTypes.string,
   extraCss: PropTypes.string,
+  cssobj: PropTypes.object,
   onClick: PropTypes.func,
 };
 
