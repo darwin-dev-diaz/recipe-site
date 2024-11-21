@@ -126,6 +126,7 @@ function RecipeScreen() {
 
   if (recipeError) return <Error />;
   if (recipeLoading || loading) return <Loading />;
+  console.log(recipeData.summary);
   return (
     <div>
       {/* top section start */}
@@ -140,7 +141,7 @@ function RecipeScreen() {
         </p>
 
         <p
-          className="line mb-5 uppercase leading-6"
+          className="summary line mb-5 uppercase leading-6"
           dangerouslySetInnerHTML={
             recipeLoading
               ? {
@@ -210,7 +211,7 @@ function RecipeScreen() {
                     {`day ${selectedDate.day} meal plan`}
                   </h2>
                 </div>
-                <div className="flex w-full gap-2 overflow-auto">
+                <div className="PLANBOX flex w-full gap-2 overflow-auto">
                   {["breakfast", "lunch", "dinner"].map((meal, i) => {
                     const selectedPlanAsKey = getDayAsPlannerKey(
                       selectedDate.year,
@@ -222,7 +223,7 @@ function RecipeScreen() {
                     const mealID = todaysPlanner ? todaysPlanner[meal] : null;
 
                     return (
-                      <div key={i}>
+                      <div key={i} className="PLAN">
                         <p className="mb-2 text-xl font-bold uppercase">
                           {meal}
                         </p>

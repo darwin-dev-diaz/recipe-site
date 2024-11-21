@@ -104,3 +104,11 @@
 .shake {
   animation: shake 0.5s infinite;
 }
+
+.summary {
+  display: -webkit-box; /* Flex-like behavior */
+  -webkit-box-orient: vertical; /* Defines vertical stacking */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Adds "..." to the cut-off text */
+  -webkit-line-clamp: 7; /* Limits the paragraph to 5 lines */
+}
