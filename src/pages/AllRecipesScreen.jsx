@@ -1,6 +1,6 @@
 import { RecipeContext } from "../App";
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { idToImage } from "../util/idToImage";
 import { useState } from "react";
 import Loading from "../components/primatives/Loading";
@@ -15,6 +15,18 @@ function AllRecipesScreen() {
   const [selected, setSelected] = useState(0);
   const { category } = useParams();
   const dishTypes = ["none", "main courses", "soups", "appetizers", "desserts"];
+  const navigate = useNavigate();
+
+  if (!dishTypes.includes(category) && category) {
+    navigate("/error", {
+      replace: true,
+      state: {
+        statusText: `/allrecipes/${category} not found`,
+        status: 404,
+        data: "You are trying to filter by a category that doesn't exist",
+      },
+    });
+  }
 
   useEffect(() => {
     if (category && dishTypes.includes(category)) {
