@@ -62,22 +62,29 @@ function MonthlyPlanScreen() {
       </h3>
       {selectedPlan ? (
         <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
-          {Object.entries(selectedPlan).map(([meal, recipeID], iii) => {
-            const title = expandedData[recipeID].title;
+          {Object.entries(selectedPlan)
+            .sort((a, b) => {
+              const order = ["breakfast", "lunch", "dinner"];
+              const aOrder = order.indexOf(a[0]);
+              const bOrder = order.indexOf(b[0]);
+              return aOrder - bOrder;
+            })
+            .map(([meal, recipeID], iii) => {
+              const title = expandedData[recipeID].title;
 
-            return (
-              <div key={iii}>
-                <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
-                <RemoveableRecipe
-                  title={title}
-                  to={`/recipe/${recipeID}`}
-                  id={recipeID}
-                  image={idToImage(recipeID)}
-                  onClick={() => removeFromPlanner(selectedDateAsKey, meal)}
-                ></RemoveableRecipe>
-              </div>
-            );
-          })}
+              return (
+                <div key={iii}>
+                  <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
+                  <RemoveableRecipe
+                    title={title}
+                    to={`/recipe/${recipeID}`}
+                    id={recipeID}
+                    image={idToImage(recipeID)}
+                    onClick={() => removeFromPlanner(selectedDateAsKey, meal)}
+                  ></RemoveableRecipe>
+                </div>
+              );
+            })}
         </div>
       ) : (
         <div className="w-full">

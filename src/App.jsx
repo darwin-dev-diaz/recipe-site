@@ -50,7 +50,7 @@ function App() {
 
   // planner stuff
   const [planner, setPlanner] = useState({
-    "1November2024": { breakfast: 641111, lunch: 641908, dinner: 1096250 },
+    "1November2024": { lunch: 641908, breakfast: 641111, dinner: 1096250 },
     "2November2024": { breakfast: 641111, lunch: 641908 },
   });
   const addToPlanner = (plannerID, meal, mealID) => {
