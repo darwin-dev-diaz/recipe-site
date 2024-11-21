@@ -51,13 +51,7 @@ function Header() {
     setCanScroll(true);
   };
 
-  console.log({ error }, !!error);
-  console.log(
-    "Search Open:",
-    searchOpen,
-    "Search Results Length:",
-    searchResults.length,
-  );
+
   const returnSearchResults = (search) => {
     const r =
       !loading && search

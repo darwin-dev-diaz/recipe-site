@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { removeDuplicateObjs } from "./returnUniqueArrOfObj";
-import key from "../../apiKey";
+import getValidKey from "./apiKeyTester";
+
 const exampleResponse = {
   results: [
     {
@@ -48,15 +49,13 @@ const useData = (test = false, throwErr = false) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
   const dishTypes = ["main%20course", "dessert", "soup", "appetizer"];
   const manualErr = new Error("manualErr");
   useEffect(() => {
-    if (test) {
-      console.log("testData ran");
-      setData(exampleResponse.results);
-      setLoading(false);
-    } else {
+    const setStates = async () => {
+      const key = await getValidKey();
+      const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
+
       const fetchPromises = dishTypes.map((dish) =>
         fetch(link + dish, { mode: "cors" })
           .then(
@@ -91,6 +90,13 @@ const useData = (test = false, throwErr = false) => {
           setError(error);
         })
         .finally(() => setLoading(false));
+    };
+
+    if (test) {
+      setData(exampleResponse.results);
+      setLoading(false);
+    } else {
+      setStates();
     }
   }, []);
 
