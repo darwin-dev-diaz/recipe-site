@@ -5,6 +5,8 @@ import { idToImage } from "../util/idToImage";
 
 import fetchRecipeData from "../util/fetchRecipeData";
 import Loading from "../components/primatives/Loading";
+import Error from "../components/primatives/Error";
+
 import ScrollableCalendar from "../components/ScrollableCalendar";
 import AllRecipesRecipe from "../components/AllRecipesRecipe";
 import Button from "../components/primatives/Button";
@@ -25,9 +27,9 @@ function RecipeScreen() {
     planner,
     removeFromPlanner,
     addToPlanner,
+    loading,
   } = useContext(RecipeContext);
   const { recipeID } = useParams();
-  console.log({ recipeID });
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
   const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -55,15 +57,14 @@ function RecipeScreen() {
 
   // Initial state as null or an empty object to prevent undefined errors
   const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [recipeLoading, setRecipeLoading] = useState(true);
+  const [recipeError, setRecipeError] = useState(false);
 
   // reset states because component doesn't unmount on parameter change
- 
 
-  // for disabling loading if recipe is already in expandedRecipes
+  // for disabling recipeLoading if recipe is already in expandedRecipes
   useEffect(() => {
-    if (recipeData) setLoading(false);
+    if (recipeData) setRecipeLoading(false);
   }, [recipeData]);
 
   // for fetching the missing expandedRecipes
@@ -73,14 +74,14 @@ function RecipeScreen() {
         recipeID,
         false,
         undefined,
-        setLoading,
-        setError,
+        setRecipeLoading,
+        setRecipeError,
       );
       setRecipeData(result);
       addExpandedData(Number(recipeID), result);
     };
 
-    if (!recipeData && isRecipe) {
+    if (!recipeData && isRecipe && !recipeError) {
       console.log("called fetchRecipe");
       fetchRecipe();
     }
@@ -112,16 +113,17 @@ function RecipeScreen() {
     });
   };
 
-  if (loading) return <Loading />;
+  if (recipeError) return <Error />;
+  if (recipeLoading || loading) return <Loading />;
   return (
     <div>
       {/* top section start */}
       <div className="section px-6">
         <h1 className="mt-10 text-3xl font-extrabold uppercase">
-          {loading ? "Loading" : recipeData.title}
+          {recipeLoading ? "Loading" : recipeData.title}
         </h1>
         <p className="mb-6 font-semibold text-dark-light-grey">
-          {loading
+          {recipeLoading
             ? "Loading"
             : `${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / ${Math.round(recipeData.nutrition.nutrients[10].amount)}g Protien`}
         </p>
@@ -129,7 +131,7 @@ function RecipeScreen() {
         <p
           className="line mb-5 uppercase leading-6"
           dangerouslySetInnerHTML={
-            loading
+            recipeLoading
               ? {
                   __html: "Loading",
                 }
@@ -269,7 +271,7 @@ function RecipeScreen() {
           style={{ backgroundImage: `url(${idToImage(recipeID)})` }}
         ></div>
         <h3 className="tracking mb-12 text-center text-2xl font-extrabold">
-          {loading ? "Loading" : recipeData.title}
+          {recipeLoading ? "Loading" : recipeData.title}
         </h3>
         <div className="mx-auto flex">
           <SvgStar fill="#F2B955"></SvgStar>
@@ -279,16 +281,17 @@ function RecipeScreen() {
           <SvgStar fill="#F2B955"></SvgStar>
         </div>
         <span>
-          {loading
+          {recipeLoading
             ? "Loading"
             : `${Math.round(recipeData.nutrition.nutrients[0].amount)} Calories / serving`}
         </span>
         <div className="flex gap-4">
           <span>
-            Ready in: {loading ? "Loading" : recipeData.readyInMinutes} MINS
+            Ready in: {recipeLoading ? "Loading" : recipeData.readyInMinutes}{" "}
+            MINS
           </span>
           <span>
-            Yields: {loading ? "Loading" : recipeData.servings} servings
+            Yields: {recipeLoading ? "Loading" : recipeData.servings} servings
           </span>
         </div>
       </div>
@@ -313,7 +316,7 @@ function RecipeScreen() {
         {/* ingredients start */}
         <h3 className="mb-9 text-2xl font-extrabold uppercase">Ingredients</h3>
         <ul className="mb-9 ml-6 flex list-disc flex-col gap-2">
-          {loading
+          {recipeLoading
             ? "Loading"
             : recipeData.nutrition.ingredients.map((ingredient, i) => (
                 <li key={i} className="text-sm font-semibold uppercase">

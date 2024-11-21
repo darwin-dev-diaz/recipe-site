@@ -15,12 +15,12 @@ function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { data, loading } = useContext(RecipeContext);
+  const { data, loading, setCanScroll, error } = useContext(RecipeContext);
 
   const handleSubmit = (e) => {
     e ? e.preventDefault() : null;
-    setSearchText("");
-    setSearchOpen(false);
+    // setSearchText("");
+    // setSearchOpen(false);
   };
 
   const handleOnChange = (e) => {
@@ -33,6 +33,21 @@ function Header() {
     setSearchOpen(false);
     setSearchText("");
     setSearchResults([]);
+    setCanScroll(true);
+  };
+  const handleOpenSearch = () => {
+    setSearchOpen(true);
+    setCanScroll(false);
+    setMobileMenuOpen(false);
+  };
+
+  const handleOpenMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    setCanScroll(false);
+  };
+  const handleCloseMenu = () => {
+    setMobileMenuOpen(false);
+    setCanScroll(true);
   };
 
   const returnSearchResults = (search) => {
@@ -48,10 +63,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 flex justify-between bg-[var(--black)]">
-      <IconButton
-        aria-label="Menu"
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      >
+      <IconButton aria-label="Menu" onClick={handleOpenMenu}>
         <SvgMenu></SvgMenu>
       </IconButton>
 
@@ -68,22 +80,17 @@ function Header() {
         <IconButton
           aria-label="Search"
           cssobj={searchOpen ? { backgroundColor: "var(--orange)" } : {}}
-          onClick={
-            searchOpen ? () => handleSubmit() : () => setSearchOpen(true)
-          }
+          onClick={searchOpen ? () => handleSubmit() : () => handleOpenSearch()}
         >
           <SvgSearch></SvgSearch>
         </IconButton>
       </div>
 
       {mobileMenuOpen ? (
-        <MobileMenu
-          closeMenu={() => {
-            setMobileMenuOpen(false);
-          }}
-        ></MobileMenu>
+        <MobileMenu closeMenu={handleCloseMenu}></MobileMenu>
       ) : null}
 
+      {/* search bar  */}
       <div
         className={`absolute ${searchOpen ? "left-0" : "left-[-100%]"} top-0 z-40 flex h-full w-full`}
         style={{
@@ -107,15 +114,21 @@ function Header() {
         </form>
       </div>
 
+      {/* black blur */}
       <div
         className={`absolute ${
-          searchOpen ? "translate-y-0" : "translate-y-full"
+          searchOpen || mobileMenuOpen ? "translate-y-0" : "translate-y-full"
         } top-full z-10 h-screen w-full bg-black bg-opacity-50 backdrop-blur-sm`}
+        onClick={() => {
+          setSearchOpen(false);
+          setMobileMenuOpen(false);
+          setCanScroll(true);
+        }}
       ></div>
+
       {/* search results box */}
       {searchOpen && searchResults.length ? (
-        <div className="absolute top-full z-40 flex h-fit w-full flex-col gap-4 bg-white px-6 py-5">
-          {/* currently figuring out why clicking the SearchResult opens a strange recipe */}
+        <div className="absolute top-full z-40 flex h-fit w-full flex-col gap-4 overflow-auto bg-white px-6 py-5">
           {Array.from(searchResults).map((recipe, i) => {
             return (
               <SearchResult

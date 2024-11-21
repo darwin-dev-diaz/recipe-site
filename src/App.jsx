@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import useData from "./util/useData";
 // import useRecipeData from "./util/useRecipeData";
 // import fetchRecipeData from "./util/fetchRecipeData";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { latestRecipes, featuredRecipes } from "./data/prefilledData";
 import ScrollToTop from "./util/ScrollToTop";
 
@@ -22,11 +22,12 @@ export const RecipeContext = createContext({
   planner: {},
   addToPlanner: () => {},
   removeFromPlanner: () => {},
+  setCanScroll: () => {},
 });
 
 function App() {
   // data and expandedDataStuff
-  const { data, error, loading } = useData(true);
+  const { data, error, loading } = useData(false, true);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));
@@ -88,6 +89,13 @@ function App() {
     }
   });
 
+  const [canScroll, setCanScroll] = useState(true);
+  useEffect(() => {
+    // Prevent scrolling when the component is mounted
+    if (canScroll) document.body.style.overflow = "auto";
+    else document.body.style.overflow = "hidden";
+  }, [canScroll]);
+
   return (
     <RecipeContext.Provider
       value={{
@@ -104,6 +112,7 @@ function App() {
         planner,
         addToPlanner,
         removeFromPlanner,
+        setCanScroll,
       }}
     >
       <ScrollToTop />

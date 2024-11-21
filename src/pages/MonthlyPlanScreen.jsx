@@ -3,12 +3,13 @@ import { useState, useContext } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
 import Loading from "../components/primatives/Loading";
+import Error from "../components/primatives/Error";
 import ScrollableCalendar from "../components/ScrollableCalendar";
 import Button from "../components/primatives/Button";
 import { Link } from "react-router-dom";
 
 function MonthlyPlanScreen() {
-  const { planner, removeFromPlanner, expandedData, loading } =
+  const { planner, removeFromPlanner, expandedData, loading, error } =
     useContext(RecipeContext);
 
   const today = new Date();
@@ -43,6 +44,7 @@ function MonthlyPlanScreen() {
   );
   const selectedPlan = planner[selectedPlanAsKey];
 
+  if (error) return <Error />;
   if (loading) return <Loading />;
   return (
     <>

@@ -43,16 +43,17 @@ const exampleResponse = {
   totalResults: 8,
 };
 
-const useData = (test = false) => {
+const useData = (test = false, throwErr = false) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
   const dishTypes = ["main%20course", "dessert", "soup", "appetizer"];
-
+  const manualErr = new Error("manualErr");
   useEffect(() => {
     if (test) {
+      console.log("testData ran");
       setData(exampleResponse.results);
       setLoading(false);
     } else {
@@ -81,10 +82,14 @@ const useData = (test = false) => {
 
       Promise.all(fetchPromises)
         .then((results) => {
+          if (throwErr) throw manualErr;
           const output = removeDuplicateObjs(results.flat());
           setData(output);
         })
-        .catch((error) => setError(error))
+        .catch((error) => {
+          console.log("error caught");
+          setError(error);
+        })
         .finally(() => setLoading(false));
     }
   }, []);

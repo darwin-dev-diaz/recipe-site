@@ -8,7 +8,7 @@ function MobileMenu(props) {
   const [favoritesOpen, setFavoritesOpen] = useState(false);
 
   return (
-    <nav className="absolute top-16 w-full bg-white py-8 shadow-lg">
+    <nav className="absolute top-16 z-40 w-full bg-white py-8 shadow-lg">
       <ul className="flex w-full flex-col gap-4">
         <li onClick={props.closeMenu} className="cursor-pointer">
           <Link to="/" className="pl-6 text-xl font-extrabold uppercase">

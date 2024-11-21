@@ -1,7 +1,6 @@
 import App from "./App.jsx";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import AllRecipesScreen from "./pages/AllRecipesScreen.jsx";
-import RecipeScreen from "./pages/RecipeScreen.jsx";
 import FavoritesScreen from "./pages/FavoritesScreen.jsx";
 import MonthlyPlanScreen from "./pages/MonthlyPlanScreen.jsx";
 import RecipeScreenWrapper from "./util/RecipeScreenWrapper.jsx";

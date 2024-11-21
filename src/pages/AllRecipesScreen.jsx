@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { idToImage } from "../util/idToImage";
 import { useState } from "react";
 import Loading from "../components/primatives/Loading";
+import Error from "../components/primatives/Error";
 import Button from "../components/primatives/Button";
 import SvgFilterList from "../assets/icons/FilterList";
 import AllRecipesRecipe from "../components/AllRecipesRecipe";
 
 function AllRecipesScreen() {
-  const { data, loading } = useContext(RecipeContext);
+  const { data, loading, error } = useContext(RecipeContext);
   const [sortOpen, setSortOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const { category } = useParams();
@@ -26,6 +27,7 @@ function AllRecipesScreen() {
       ? data
       : data.filter((recipe) => recipe.myDishType === dishTypes[selected]);
 
+  if (error) return <Error />;
   if (loading) return <Loading />;
   return (
     <div className="px-6">

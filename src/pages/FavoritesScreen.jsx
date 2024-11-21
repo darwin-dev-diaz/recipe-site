@@ -3,11 +3,13 @@ import { RecipeContext } from "../App";
 import { useContext } from "react";
 import { idToImage } from "../util/idToImage";
 import Loading from "../components/primatives/Loading";
+import Error from "../components/primatives/Error";
 
 function FavoritesScreen() {
-  const { favoriteRecipes, expandedData, loading, removeFavorite } =
+  const { favoriteRecipes, expandedData, loading, error, removeFavorite } =
     useContext(RecipeContext);
 
+  if (error) return <Error/>;
   if (loading) return <Loading />;
 
   return (
