@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { RecipeContext } from "../App";
 import SearchResult from "./SearchResult";
 import { idToImage } from "../util/idToImage";
+import Error from "./primatives/Error";
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,6 +51,13 @@ function Header() {
     setCanScroll(true);
   };
 
+  console.log({ error }, !!error);
+  console.log(
+    "Search Open:",
+    searchOpen,
+    "Search Results Length:",
+    searchResults.length,
+  );
   const returnSearchResults = (search) => {
     const r =
       !loading && search
@@ -128,7 +136,7 @@ function Header() {
 
       {/* search results box */}
       {searchOpen && searchResults.length ? (
-        <div className="absolute top-full z-40 flex h-fit w-full flex-col gap-4 overflow-auto bg-white px-6 py-5">
+        <div className="absolute top-full z-40 flex max-h-[90vh] w-full flex-col gap-4 overflow-y-auto bg-white px-6 py-5">
           {Array.from(searchResults).map((recipe, i) => {
             return (
               <SearchResult
@@ -140,6 +148,12 @@ function Header() {
               />
             );
           })}
+        </div>
+      ) : null}
+
+      {searchOpen && error ? (
+        <div className="absolute top-full z-40 flex h-fit max-h-[90vh] w-full flex-col gap-4 overflow-y-auto bg-white px-6 py-5">
+          <Error />
         </div>
       ) : null}
     </header>
