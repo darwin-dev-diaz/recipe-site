@@ -1,4 +1,5 @@
-import key from "../../apiKey";
+import getValidKey from "./apiKeyTester";
+
 const fetchRecipeData = async (id, test, setData, setLoading, setError) => {
   const exampleData = {
     vegetarian: true,
@@ -2100,6 +2101,7 @@ const fetchRecipeData = async (id, test, setData, setLoading, setError) => {
     spoonacularScore: 0.3635493814945221,
     spoonacularSourceUrl: "https://spoonacular.com/spiced-lassi-660959",
   };
+  const key = await getValidKey();
   const link = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${key}&includeNutrition=true`;
   if (test) {
     return setData ? setData(exampleData) : exampleData;

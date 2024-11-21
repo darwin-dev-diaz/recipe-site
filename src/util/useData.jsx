@@ -56,6 +56,8 @@ const useData = (test = false, throwErr = false) => {
       const key = await getValidKey();
       const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
 
+     
+
       const fetchPromises = dishTypes.map((dish) =>
         fetch(link + dish, { mode: "cors" })
           .then(

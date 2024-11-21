@@ -12,6 +12,13 @@ async function getValidKey(index = 0) {
 
       return getValidKey(index + 1);
     }
+    const json = await response.json();
+
+    console.log("FROM getValidKey");
+    console.log(keyArr[index]);
+    console.log({ json });
+    console.log("FROM getValidKey END");
+    
     return keyArr[index];
   } catch (err) {
     console.error("Network or Fetch Error:", err);
