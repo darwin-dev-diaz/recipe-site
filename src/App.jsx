@@ -27,7 +27,7 @@ export const RecipeContext = createContext({
 
 function App() {
   // data and expandedDataStuff
-  const { data, error, loading } = useData(false);
+  const { data, error, loading } = useData(true, true);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));

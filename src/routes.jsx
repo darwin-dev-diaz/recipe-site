@@ -4,6 +4,7 @@ import AllRecipesScreen from "./pages/AllRecipesScreen.jsx";
 import FavoritesScreen from "./pages/FavoritesScreen.jsx";
 import MonthlyPlanScreen from "./pages/MonthlyPlanScreen.jsx";
 import RecipeScreenWrapper from "./util/RecipeScreenWrapper.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 const routes = [
   {
@@ -16,9 +17,9 @@ const routes = [
       { path: "recipe/:recipeID", element: <RecipeScreenWrapper /> },
       { path: "favorites", element: <FavoritesScreen /> },
       { path: "plan", element: <MonthlyPlanScreen /> },
-
       //   { path: "product/:item", element: <ProductPage /> },
     ],
+    errorElement: <ErrorBoundary />,
   },
 ];
 
