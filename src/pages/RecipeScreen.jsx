@@ -8,7 +8,7 @@ import Loading from "../components/primatives/Loading";
 import Error from "../components/primatives/Error";
 
 import ScrollableCalendar from "../components/ScrollableCalendar";
-import AllRecipesRecipe from "../components/AllRecipesRecipe";
+import RecipePlan from "../components/RecipePlan";
 import Button from "../components/primatives/Button";
 import SvgDownArrow from "../assets/icons/DownArrow";
 import SvgFavorite from "../assets/icons/Favorite";
@@ -211,7 +211,7 @@ function RecipeScreen() {
                     {`day ${selectedDate.day} meal plan`}
                   </h2>
                 </div>
-                <div className="PLANBOX flex w-full gap-2 overflow-auto">
+                <div className="PLANBOX flex w-full flex-col gap-2 overflow-auto">
                   {["breakfast", "lunch", "dinner"].map((meal, i) => {
                     const selectedPlanAsKey = getDayAsPlannerKey(
                       selectedDate.year,
@@ -223,32 +223,37 @@ function RecipeScreen() {
                     const mealID = todaysPlanner ? todaysPlanner[meal] : null;
 
                     return (
-                      <div key={i} className="PLAN">
-                        <p className="mb-2 text-xl font-bold uppercase">
-                          {meal}
-                        </p>
-                        <AllRecipesRecipe
-                          title={mealID ? expandedData[mealID].title : "empty"}
-                          id={mealID ? mealID : ""}
-                          image={idToImage(mealID)}
-                          buttonColor={mealID ? "light-grey" : "orange"}
-                          buttonText={mealID ? "remove plan" : "add plan"}
-                          onClick={
-                            mealID
-                              ? () =>
-                                  removeFromPlanner(
-                                    selectedPlanAsKey,
-                                    meal,
-                                    mealID,
-                                  )
-                              : () =>
-                                  addToPlanner(
-                                    selectedPlanAsKey,
-                                    meal,
-                                    recipeID,
-                                  )
-                          }
-                        ></AllRecipesRecipe>
+                      <div key={i}>
+                        <div className="PLAN px-3">
+                          <p className="mb-2 text-xl font-bold uppercase">
+                            {meal}
+                          </p>
+                          <RecipePlan
+                            title={
+                              mealID ? expandedData[mealID].title : "empty"
+                            }
+                            id={mealID ? mealID : ""}
+                            image={idToImage(mealID)}
+                            buttonColor={mealID ? "light-grey" : "orange"}
+                            buttonText={mealID ? "remove plan" : "add plan"}
+                            onClick={
+                              mealID
+                                ? () =>
+                                    removeFromPlanner(
+                                      selectedPlanAsKey,
+                                      meal,
+                                      mealID,
+                                    )
+                                : () =>
+                                    addToPlanner(
+                                      selectedPlanAsKey,
+                                      meal,
+                                      recipeID,
+                                    )
+                            }
+                          ></RecipePlan>
+                          <hr className="my-4"/>
+                        </div>
                       </div>
                     );
                   })}
