@@ -46,6 +46,21 @@ function MonthlyPlanScreen() {
 
   const selectedPlan = planner[selectedDateAsKey];
 
+  const getOrdinalSuffixOf = (i) => {
+    let j = i % 10,
+      k = i % 100;
+    if (j === 1 && k !== 11) {
+      return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+      return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+      return i + "rd";
+    }
+    return i + "th";
+  };
+
   if (error) return <Error />;
   if (loading) return <Loading />;
   return (
@@ -57,7 +72,7 @@ function MonthlyPlanScreen() {
       />
 
       <h3 className="mb-8 px-6 text-center text-3xl font-bold uppercase">
-        {`${months[selectedDate.month - 1]} ${selectedDate.day}, ${selectedDate.year}`}{" "}
+        {`The ${getOrdinalSuffixOf(selectedDate.day)}'s `}{" "}
         Meal Plan
       </h3>
       {selectedPlan ? (
