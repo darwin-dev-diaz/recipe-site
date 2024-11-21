@@ -71,7 +71,7 @@ npm install
 
 
 
-Running the App
+## Running the App
 
 To start the development server, run:
 
@@ -79,7 +79,7 @@ npm run dev
 
 The application will be accessible at http://localhost:5173.
 
-Available Scripts
+## Available Scripts
 
 	•	npm run dev: Start the development server.
 	•	npm run build: Build the app for production.
@@ -87,7 +87,7 @@ Available Scripts
 	•	npm run test: Run unit tests with Vitest.
 	•	npm run lint: Lint the codebase with ESLint.
 
-Project Structure
+## Project Structure
 
 src/
 ├── assets/           # Static assets (e.g., images, icons)
