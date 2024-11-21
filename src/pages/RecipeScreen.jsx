@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { RecipeContext } from "../App";
 import { idToImage } from "../util/idToImage";
@@ -29,10 +29,23 @@ function RecipeScreen() {
     addToPlanner,
     loading,
   } = useContext(RecipeContext);
+  const navigate = useNavigate();
   const { recipeID } = useParams();
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
   const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
   const [calendarOpen, setCalendarOpen] = useState(false);
+  console.log(isRecipe);
+  console.log({ data });
+
+  if (!isRecipe)
+    navigate("/error", {
+      replace: true,
+      state: {
+        statusText: `/recipe/${recipeID} not found`,
+        status: 404,
+        data: "You are trying to search for a recipe that doesn't exist",
+      },
+    });
 
   // variables for scrollable calendar
   const [selectedDate, setSelectedDate] = useState({
