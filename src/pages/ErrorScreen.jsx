@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import Error from "../components/primatives/Error";
 
 function ErrorScreen() {
+  // this is to get custom error messages RecipeScreen or AllRecipesScreen
   const location = useLocation();
 
   return (

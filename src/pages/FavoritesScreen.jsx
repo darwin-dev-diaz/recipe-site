@@ -11,7 +11,6 @@ function FavoritesScreen() {
 
   if (error) return <Error/>;
   if (loading) return <Loading />;
-
   return (
     <div className="px-6">
       <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">

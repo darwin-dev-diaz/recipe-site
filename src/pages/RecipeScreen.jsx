@@ -34,9 +34,8 @@ function RecipeScreen() {
   const isFavorite = favoriteRecipes.includes(Number(recipeID));
   const isRecipe = data.some((recipe) => recipe.id === Number(recipeID));
   const [calendarOpen, setCalendarOpen] = useState(false);
-  console.log(isRecipe);
-  console.log({ data });
 
+  // if recipeId is not in the data, then go to the error page
   if (!isRecipe)
     navigate("/error", {
       replace: true,
@@ -68,19 +67,18 @@ function RecipeScreen() {
     "December",
   ];
 
-  // Initial state as null or an empty object to prevent undefined errors
+  // initial state as null or an empty object to prevent undefined errors
   const [recipeData, setRecipeData] = useState(expandedData[recipeID] || null);
   const [recipeLoading, setRecipeLoading] = useState(true);
   const [recipeError, setRecipeError] = useState(false);
-
-  // reset states because component doesn't unmount on parameter change
 
   // for disabling recipeLoading if recipe is already in expandedRecipes
   useEffect(() => {
     if (recipeData) setRecipeLoading(false);
   }, [recipeData]);
 
-  // for fetching the missing expandedRecipes
+  // if the recipe isn't already in expandedData, fetch the recipe
+  // and add it to expandedData
   useEffect(() => {
     const fetchRecipe = async () => {
       const result = await fetchRecipeData(
@@ -101,7 +99,7 @@ function RecipeScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expandedData, recipeID, isRecipe]);
 
-  // instruction steps
+  // build the array of instruction steps
   let stepsArr = [];
   if (recipeData) {
     const analyzedInstructions = recipeData

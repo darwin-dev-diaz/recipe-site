@@ -1,5 +1,6 @@
 import { keyArr } from "../../apiKey";
 
+// this file cycles through the keysArr and returns the first valid key
 async function getValidKey(index = 0) {
   if (index === 10) return keyArr[0];
   const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${keyArr[index]}&number=1`;
@@ -9,16 +10,8 @@ async function getValidKey(index = 0) {
 
     if (!response.ok) {
       console.error(`API Error: ${response.status} ${response.statusText}`);
-
       return getValidKey(index + 1);
     }
-    const json = await response.json();
-
-    console.log("FROM getValidKey");
-    console.log(keyArr[index]);
-    console.log({ json });
-    console.log("FROM getValidKey END");
-    
     return keyArr[index];
   } catch (err) {
     console.error("Network or Fetch Error:", err);

@@ -1,5 +1,6 @@
 import getValidKey from "./apiKeyTester";
 
+// this file is for getting the expandedData of individual recipes by their id's
 const fetchRecipeData = async (id, test, setData, setLoading, setError) => {
   const exampleData = {
     vegetarian: true,

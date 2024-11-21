@@ -1,18 +1,16 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
-import useData from "./util/useData";
-// import useRecipeData from "./util/useRecipeData";
-// import fetchRecipeData from "./util/fetchRecipeData";
+import useData from "./hooks/useData";
 import { useState, createContext, useEffect } from "react";
 import { latestRecipes, featuredRecipes } from "./data/prefilledData";
 import ScrollToTop from "./util/ScrollToTop";
 
 export const RecipeContext = createContext({
-  data: [], // this will be all the recipes and their 'simple' information
+  data: [],
   error: null,
   loading: true,
-  expandedData: {}, // this will be the recipes "expanded" information. Populates as needed
+  expandedData: {},
   addExpandedData: () => {},
   favoriteRecipes: [],
   latestRecipes: [],
@@ -26,8 +24,14 @@ export const RecipeContext = createContext({
 });
 
 function App() {
+  // to toggle if the user can scroll or not
+  const [canScroll, setCanScroll] = useState(true);
+
   // data and expandedDataStuff
-  const { data, error, loading } = useData(true);
+  // useData(true) = use fakeData (devlopment)
+  // useData(false) = use realData (production)
+  // useData(false, true) = throw an error
+  const { data, error, loading } = useData(false);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));
@@ -89,9 +93,8 @@ function App() {
     }
   });
 
-  const [canScroll, setCanScroll] = useState(true);
+  // add or remove scroll depending on canScroll state
   useEffect(() => {
-    // Prevent scrolling when the component is mounted
     if (canScroll) document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
   }, [canScroll]);
@@ -115,7 +118,7 @@ function App() {
         setCanScroll,
       }}
     >
-      <ScrollToTop />
+      <ScrollToTop /> {/* scroll to top on each page */}
       <Header></Header>
       <div className="body w-full">
         <Outlet context={[]} />

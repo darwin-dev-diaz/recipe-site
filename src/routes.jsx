@@ -18,10 +18,9 @@ const routes = [
       { path: "recipe/:recipeID", element: <RecipeScreenWrapper /> },
       { path: "favorites", element: <FavoritesScreen /> },
       { path: "plan", element: <MonthlyPlanScreen /> },
-      { path: "error", element: <ErrorScreen /> },
-      //   { path: "product/:item", element: <ProductPage /> },
+      { path: "error", element: <ErrorScreen /> }, // handles 404 errors included in the route
     ],
-    errorElement: <ErrorBoundary />,
+    errorElement: <ErrorBoundary />, // handles 404 errors not included in the route
   },
 ];
 

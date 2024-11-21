@@ -2,12 +2,11 @@ import { useContext } from "react";
 import { RecipeContext } from "../App";
 import { Link } from "react-router-dom";
 import { idToImage } from "../util/idToImage";
-
+import SvgAdd from "../assets/icons/Add";
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
 import Button from "../components/primatives/Button";
-import SvgAdd from "../assets/icons/Add";
 import Loading from "../components/primatives/Loading";
 
 function HomeScreen() {

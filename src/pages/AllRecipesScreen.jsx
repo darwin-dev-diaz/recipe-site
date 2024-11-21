@@ -17,6 +17,7 @@ function AllRecipesScreen() {
   const dishTypes = ["none", "main courses", "soups", "appetizers", "desserts"];
   const navigate = useNavigate();
 
+  // make sure the category is valid. If not throw erre
   if (!dishTypes.includes(category) && category) {
     navigate("/error", {
       replace: true,
@@ -28,12 +29,14 @@ function AllRecipesScreen() {
     });
   }
 
+  // if the parameter category is set, set the selected state right away
   useEffect(() => {
     if (category && dishTypes.includes(category)) {
       setSelected(dishTypes.indexOf(category));
     }
   }, [category]);
 
+  // the data to display
   const selectedData =
     selected === 0
       ? data
@@ -65,8 +68,6 @@ function AllRecipesScreen() {
             {dishTypes.map((item, i) => (
               <div
                 key={i}
-                // to={`./${item.replace(" ", "-")}`}
-                // to={`./`}
                 className="justify-left flex items-center gap-2"
                 onClick={() => setSelected(i)}
               >

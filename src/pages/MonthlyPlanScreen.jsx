@@ -7,12 +7,12 @@ import Error from "../components/primatives/Error";
 import ScrollableCalendar from "../components/ScrollableCalendar";
 import Button from "../components/primatives/Button";
 import { Link } from "react-router-dom";
+import getDayAsPlannerKey from "../util/getDayAsPlannerKey";
 
 function MonthlyPlanScreen() {
   const { planner, removeFromPlanner, expandedData, loading, error } =
     useContext(RecipeContext);
 
-  const today = new Date();
   const months = [
     "January",
     "February",
@@ -28,21 +28,23 @@ function MonthlyPlanScreen() {
     "December",
   ];
 
-  const todaysYear = today.getFullYear();
-  const todaysMonth = today.getMonth() + 1;
-  const todaysDay = today.getDate();
+  const today = new Date();
+
+  // when component loads, setSelectedDate to today
   const [selectedDate, setSelectedDate] = useState({
-    month: todaysMonth,
-    day: todaysDay,
-    year: todaysYear,
+    month: today.getMonth() + 1,
+    day: today.getDate(),
+    year: today.getFullYear(),
   });
-  const getDayAsPlannerKey = (y, m, d) => `${d}${m}${y}`;
-  const selectedPlanAsKey = getDayAsPlannerKey(
+
+  // get the selectedDate as a key compatiable with the data obj
+  const selectedDateAsKey = getDayAsPlannerKey(
     selectedDate.year,
     months[selectedDate.month - 1],
     selectedDate.day,
   );
-  const selectedPlan = planner[selectedPlanAsKey];
+
+  const selectedPlan = planner[selectedDateAsKey];
 
   if (error) return <Error />;
   if (loading) return <Loading />;
@@ -62,9 +64,7 @@ function MonthlyPlanScreen() {
         <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
           {Object.entries(selectedPlan).map(([meal, recipeID], iii) => {
             const title = expandedData[recipeID].title;
-            const removeFromPlannerClick = () => {
-              removeFromPlanner(selectedPlanAsKey, meal);
-            };
+
             return (
               <div key={iii}>
                 <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
@@ -73,7 +73,7 @@ function MonthlyPlanScreen() {
                   to={`/recipe/${recipeID}`}
                   id={recipeID}
                   image={idToImage(recipeID)}
-                  onClick={removeFromPlannerClick}
+                  onClick={() => removeFromPlanner(selectedDateAsKey, meal)}
                 ></RemoveableRecipe>
               </div>
             );

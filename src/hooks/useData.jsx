@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { removeDuplicateObjs } from "./returnUniqueArrOfObj";
-import getValidKey from "./apiKeyTester";
+import {removeDuplicateObjs} from "../util/returnUniqueArrOfObj";
+import getValidKey from "../util/apiKeyTester";
 
 const exampleResponse = {
   results: [
@@ -44,6 +44,8 @@ const exampleResponse = {
   totalResults: 8,
 };
 
+// this file gets the simple data of all the recipes.
+// it makes 4 api calls and only does so once per website visit
 const useData = (test = false, throwErr = false) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,8 +58,7 @@ const useData = (test = false, throwErr = false) => {
       const key = await getValidKey();
       const link = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&cuisine=asian&number=25&type=`;
 
-     
-
+      // returns the promises of the 4 different dishTypes
       const fetchPromises = dishTypes.map((dish) =>
         fetch(link + dish, { mode: "cors" })
           .then(
@@ -81,6 +82,7 @@ const useData = (test = false, throwErr = false) => {
           }),
       );
 
+      // cleans any duplicates, then calls setData to provide basic data for the website
       Promise.all(fetchPromises)
         .then((results) => {
           if (throwErr) throw manualErr;
