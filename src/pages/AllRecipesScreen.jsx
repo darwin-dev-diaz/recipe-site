@@ -49,11 +49,13 @@ function AllRecipesScreen() {
   return (
     <div className="flex w-full items-center justify-center px-6">
       <div className="max-w-[72rem]">
+        
         <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
           <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-2xl font-extrabold uppercase text-white md:text-3xl">
             All Recipes
           </h2>
         </div>
+
         <div className="mx-auto mb-6 flex w-full max-w-xs cursor-pointer flex-col items-center md:max-w-sm">
           <Button
             height="h-[50px]"
