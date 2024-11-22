@@ -8,7 +8,9 @@ function SocialIcon(props) {
     fill: "black",
   });
   return (
-    <button className="h-14 w-14 flex content-center justify-center rounded-full bg-[var(--light-orange)] p-1 text-white">
+    <button
+      className={`${props.extraCss ? props.extraCss : ""} flex h-14 w-14 content-center justify-center rounded-full bg-[var(--light-orange)] p-1 text-white`}
+    >
       {clonedElement}
     </button>
   );
@@ -16,6 +18,7 @@ function SocialIcon(props) {
 
 SocialIcon.propTypes = {
   children: PropTypes.node.isRequired,
+  extraCss: PropTypes.string,
 };
 
 export default SocialIcon;
