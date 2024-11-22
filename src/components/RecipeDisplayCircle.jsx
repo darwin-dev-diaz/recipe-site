@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 function RecipeDisplayCircle(props) {
   return (
     <Link to={props.to}>
-      <div className="flex w-32 cursor-pointer flex-col items-center gap-3">
+      <div className="flex w-24 flex-col items-center gap-3 md:w-32">
         <div
-          className="h-32 w-32 rounded-full bg-black bg-cover bg-center"
+          className="h-24 w-24 rounded-full bg-black bg-cover bg-center md:h-32 md:w-32"
           style={{ backgroundImage: `url(${props.image})` }}
         ></div>
-        <h3 className="text-center text-lg font-bold uppercase">
+        <h3 className="text-center text-sm font-bold uppercase md:text-lg">
           {props.title}
         </h3>
       </div>

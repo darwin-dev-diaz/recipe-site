@@ -8,21 +8,27 @@ import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
 import Button from "../components/primatives/Button";
 import Loading from "../components/primatives/Loading";
+import image from "../assets/images/forward-arrow.jpg";
+import TextInputField from "../components/primatives/InputField";
+import SocialIcon from "../components/primatives/SocialIcon";
+import SvgInstagram from "../assets/icons/Instagram";
+import SvgTwitter from "../assets/icons/Twitter";
+import SvgSkillet from "../assets/icons/Skillet";
 
 function HomeScreen() {
   const { latestRecipes, featuredRecipes, loading } = useContext(RecipeContext);
 
   if (loading) return <Loading />;
   return (
-    <div className="px-6">
+    <div className="mx-auto flex max-w-[72rem] flex-col px-6">
       <div className="section mb-16">
-        <div className="relative mb-8 mt-10 flex flex-col gap-4">
+        <div className="relative mb-8 mt-10 flex flex-col items-center gap-4">
           <div className="absolute left-[50%] z-40 flex h-12 w-full max-w-96 translate-x-[-50%] translate-y-[-50%] items-center bg-orange">
-            <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
-              Lastest Recipes
+            <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-xl font-extrabold uppercase text-white md:text-2xl lg:text-3xl">
+              Latest Recipes
             </h2>
           </div>
-          <div className="grid grid-cols-1 grid-rows-3 gap-4">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
             {latestRecipes.map((recipe, i) => (
               <RecipeDisplayOne
                 key={i}
@@ -30,7 +36,11 @@ function HomeScreen() {
                 title={recipe.title}
                 id={recipe.id}
                 subtitle={`${Math.round(recipe.nutrition.nutrients[0].amount)} kCal | ${Math.round(recipe.nutrition.nutrients[3].amount)} Carbs`}
-              ></RecipeDisplayOne>
+                extraCss={
+                  i === 0 ? "sm:col-span-2 lg:row-span-2 lg:h-full" : ""
+                }
+                cssobj={i === 0 ? {} : {}}
+              />
             ))}
           </div>
         </div>
@@ -43,54 +53,105 @@ function HomeScreen() {
             text="View all recipes"
             extraCss="mx-auto"
           >
-            <SvgAdd color="white"></SvgAdd>
+            <SvgAdd color="white" />
           </Button>
         </Link>
       </div>
 
       <div className="section mb-16">
-        <h2 className="mb-6 text-lg font-bold uppercase">
-          Swipe to browse categories
+        <h2 className="mb-6 text-center text-lg font-bold uppercase">
+          browse categories
         </h2>
         <div
-          className="flex gap-4 overflow-scroll"
+          className="flex gap-4 overflow-x-auto"
           style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
           <RecipeDisplayCircle
             image={idToImage(716364)}
             title="entrée"
             to="/allrecipes/main%20courses"
-          ></RecipeDisplayCircle>
+          />
           <RecipeDisplayCircle
             image={idToImage(638717)}
             title="dessert"
             to="/allrecipes/desserts"
-          ></RecipeDisplayCircle>
+          />
           <RecipeDisplayCircle
             image={idToImage(642129)}
             title="appetizers"
             to="/allrecipes/appetizers"
-          ></RecipeDisplayCircle>
+          />
           <RecipeDisplayCircle
             image={idToImage(1096250)}
             title="soups"
             to="/allrecipes/soups"
-          ></RecipeDisplayCircle>
-          =
+          />
+          <RecipeDisplayCircle
+            image={idToImage(716364)}
+            title="entrée"
+            to="/allrecipes/main%20courses"
+          />
+          <RecipeDisplayCircle
+            image={idToImage(638717)}
+            title="dessert"
+            to="/allrecipes/desserts"
+          />
+          <RecipeDisplayCircle
+            image={idToImage(642129)}
+            title="appetizers"
+            to="/allrecipes/appetizers"
+          />
+          <RecipeDisplayCircle
+            image={image}
+            title="All Recipes"
+            to="/allrecipes"
+          />
         </div>
       </div>
 
-      <div className="section mb-24">
-        <div className="grid grid-cols-1 gap-8">
-          {featuredRecipes.map((recipe, i) => (
-            <RecipeDisplayTwo
-              id={recipe.id}
-              key={i}
-              image={idToImage(recipe.id)}
-              title={recipe.title}
-              text={recipe.summary}
-            ></RecipeDisplayTwo>
-          ))}
+      <div className="section mb-24 md:flex md:gap-3">
+        <div className="md:w-[70%]">
+          <h2 className="mb-6 text-lg font-bold uppercase">
+            Read our favorite recipes
+          </h2>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-1">
+            {featuredRecipes.map((recipe, i) => (
+              <RecipeDisplayTwo
+                id={recipe.id}
+                key={i}
+                image={idToImage(recipe.id)}
+                title={recipe.title}
+                text={recipe.summary}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-[3.25rem] hidden h-fit w-[30%] flex-col items-center gap-4 bg-dark-grey p-6 md:flex">
+          <p className="text-sm font-bold uppercase tracking-wider text-white">
+            Follow Along
+          </p>
+          <div className="flex gap-4">
+            <SocialIcon>
+              <SvgInstagram />
+            </SocialIcon>
+            <SocialIcon>
+              <SvgTwitter />
+            </SocialIcon>
+            <SocialIcon>
+              <SvgSkillet />
+            </SocialIcon>
+          </div>
+          <p className="text-xl font-extrabold uppercase text-white">
+            Discover More Recipes
+          </p>
+          <p className="text-center text-sm text-white">
+            Stay updated with the latest recipes, tips, and kitchen hacks. Join
+            our community!
+          </p>
+          <TextInputField text="Your Name..." />
+          <TextInputField text="Your Email..." />
+          <Button color="light-orange" text={"Sign Me Up"} />
         </div>
       </div>
     </div>
