@@ -51,7 +51,6 @@ function Header() {
     setCanScroll(true);
   };
 
-
   const returnSearchResults = (search) => {
     const r =
       !loading && search
@@ -64,86 +63,92 @@ function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex justify-between bg-[var(--black)]">
-      <IconButton aria-label="Menu" onClick={handleOpenMenu}>
-        <SvgMenu></SvgMenu>
-      </IconButton>
-
-      <Link
-        to="/"
-        onClick={() => setMobileMenuOpen(false)}
-        aria-label="Home"
-        className="justify-item-center relative flex items-center gap-2 text-2xl font-semibold uppercase text-white"
-      >
-        <SvgSkillet height="40" width="40" fill="white"></SvgSkillet>
-        Skillpot
-      </Link>
-      <div className="z-40">
-        <IconButton
-          aria-label="Search"
-          cssobj={searchOpen ? { backgroundColor: "var(--orange)" } : {}}
-          onClick={searchOpen ? () => handleSubmit() : () => handleOpenSearch()}
-        >
-          <SvgSearch></SvgSearch>
+    <header className="sticky top-0 z-50 flex justify-center bg-[var(--black)]">
+      <div className="relative flex w-full max-w-[72rem] justify-between self-center">
+        <IconButton aria-label="Menu" onClick={handleOpenMenu}>
+          <SvgMenu></SvgMenu>
         </IconButton>
-      </div>
 
-      {mobileMenuOpen ? (
-        <MobileMenu closeMenu={handleCloseMenu}></MobileMenu>
-      ) : null}
-
-      {/* search bar  */}
-      <div
-        className={`absolute ${searchOpen ? "left-0" : "left-[-100%]"} top-0 z-40 flex h-full w-full`}
-        style={{
-          width: "calc(100% - 64px)",
-        }}
-      >
-        <IconButton
-          aria-label="Close Search"
-          onClick={() => handleCloseSearch()}
+        <Link
+          to="/"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Home"
+          className="justify-item-center relative flex items-center gap-2 text-2xl font-semibold uppercase text-white"
         >
-          <SvgClose></SvgClose>
-        </IconButton>
-        <form className="upper h-full w-full text-lg" onSubmit={handleSubmit}>
-          <input
-            value={searchText}
-            onChange={handleOnChange}
-            className="upper h-full w-full pl-3 text-lg"
-            type="text"
-            placeholder="Chicken tikka masala..."
-          />
-        </form>
+          <SvgSkillet height="40" width="40" fill="white"></SvgSkillet>
+          Skillpot
+        </Link>
+        <div className="z-40">
+          <IconButton
+            aria-label="Search"
+            cssobj={searchOpen ? { backgroundColor: "var(--orange)" } : {}}
+            onClick={
+              searchOpen ? () => handleSubmit() : () => handleOpenSearch()
+            }
+          >
+            <SvgSearch></SvgSearch>
+          </IconButton>
+        </div>
+
+        {/* search bar  */}
+        <div
+          className={`absolute ${searchOpen ? "left-0" : "hidden"} top-0 z-40 flex h-full w-full`}
+          style={{
+            width: "calc(100% - 64px)",
+            maxWidth: "calc(72rem - 64px)",
+          }}
+        >
+          <IconButton
+            aria-label="Close Search"
+            onClick={() => handleCloseSearch()}
+          >
+            <SvgClose></SvgClose>
+          </IconButton>
+          <form className="upper h-full w-full text-lg" onSubmit={handleSubmit}>
+            <input
+              value={searchText}
+              onChange={handleOnChange}
+              className="upper h-full w-full pl-3 text-lg"
+              type="text"
+              placeholder="Chicken tikka masala..."
+            />
+          </form>
+        </div>
+
+        {/* search results box */}
+        {searchOpen && searchResults.length ? (
+          <div className="absolute top-full z-40 flex max-h-[90vh] w-full flex-col gap-4 overflow-y-auto bg-white px-6 py-5">
+            {Array.from(searchResults).map((recipe, i) => {
+              return (
+                <SearchResult
+                  key={i}
+                  image={idToImage(recipe.id)}
+                  title={recipe.title}
+                  to={`/recipe/${recipe.id}`}
+                  onClick={handleCloseSearch}
+                />
+              );
+            })}
+          </div>
+        ) : null}
+
+        {/* Mobile menu */}
+        {mobileMenuOpen ? (
+          <MobileMenu closeMenu={handleCloseMenu}></MobileMenu>
+        ) : null}
       </div>
 
       {/* black blur */}
       <div
         className={`absolute ${
-          searchOpen || mobileMenuOpen ? "translate-y-0" : "translate-y-full"
+          searchOpen || mobileMenuOpen ? "translate-y-0" : "hidden"
         } top-full z-10 h-screen w-full bg-black bg-opacity-50 backdrop-blur-sm`}
         onClick={() => {
-          setSearchOpen(false);
-          setMobileMenuOpen(false);
+          handleCloseSearch();
+          handleCloseMenu();
           setCanScroll(true);
         }}
       ></div>
-
-      {/* search results box */}
-      {searchOpen && searchResults.length ? (
-        <div className="absolute top-full z-40 flex max-h-[90vh] w-full flex-col gap-4 overflow-y-auto bg-white px-6 py-5">
-          {Array.from(searchResults).map((recipe, i) => {
-            return (
-              <SearchResult
-                key={i}
-                image={idToImage(recipe.id)}
-                title={recipe.title}
-                to={`/recipe/${recipe.id}`}
-                onClick={handleCloseSearch}
-              />
-            );
-          })}
-        </div>
-      ) : null}
 
       {searchOpen && error ? (
         <div className="absolute top-full z-40 flex h-fit max-h-[90vh] w-full flex-col gap-4 overflow-y-auto bg-white px-6 py-5">
