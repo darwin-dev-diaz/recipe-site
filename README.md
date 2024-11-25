@@ -1,3 +1,9 @@
+# Live Demo
+
+🚀 **Experience the app live**: [HotPot Recipe Planner](https://recipe-site-neon.vercel.app/)
+
+Click the link above to explore the full functionality of the app, including recipe browsing, meal planning, and more!
+
 # HotPot : Recipe Planner App
 
 A React-based Recipe Planner application for food enthusiasts to explore recipes, plan meals, and manage their favorite dishes. The app integrates with the Spoonacular API to fetch recipe data, providing a smooth and feature-rich experience for users.
