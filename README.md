@@ -1,4 +1,3 @@
-```markdown
 # HotPot : Recipe Planner App
 
 A React-based Recipe Planner application for food enthusiasts to explore recipes, plan meals, and manage their favorite dishes. The app integrates with the Spoonacular API to fetch recipe data, providing a smooth and feature-rich experience for users.
@@ -34,6 +33,7 @@ A React-based Recipe Planner application for food enthusiasts to explore recipes
 ---
 
 ## Project Structure
+
 ```
 
 src/
@@ -47,7 +47,7 @@ src/
 ├── routes.jsx # Route definitions
 └── index.jsx # Entry point for the React app
 
-````
+```
 
 ---
 
@@ -57,6 +57,8 @@ src/
    ```bash
    git clone https://github.com/your-github-username/recipe-planner.git
    cd recipe-planner
+   ```
+
 ````
 
 2. Install dependencies:
@@ -123,4 +125,5 @@ For questions or feedback, reach out via [darwin.diaz.ut@gmail.com](mailto:darwi
 
 ```
 
-```
+
+````
