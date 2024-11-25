@@ -45,7 +45,7 @@ function RecipeScreen() {
           data: "You are trying to search for a recipe that doesn't exist",
         },
       });
-  }, [isRecipe, navigate, recipeID]);
+  }, [isRecipe, navigate, recipeID, loading]);
 
   // variables for scrollable calendar
   const [selectedDate, setSelectedDate] = useState({

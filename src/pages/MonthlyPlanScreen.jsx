@@ -64,61 +64,63 @@ function MonthlyPlanScreen() {
   if (error) return <Error />;
   if (loading) return <Loading />;
   return (
-    <>
+    <div className="mx-auto flex max-w-[96rem] flex-col items-center justify-center">
       <ScrollableCalendar
         setSelectedDate={setSelectedDate}
         selectedDate={selectedDate}
         calendarMb="mb-20"
+        screen="plan"
       />
 
       <h3 className="mb-8 px-6 text-center text-3xl font-bold uppercase">
-        {`The ${getOrdinalSuffixOf(selectedDate.day)}'s `}{" "}
-        Meal Plan
+        {`The ${getOrdinalSuffixOf(selectedDate.day)}'s `} Meal Plan
       </h3>
-      {selectedPlan ? (
-        <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
-          {Object.entries(selectedPlan)
-            .sort((a, b) => {
-              const order = ["breakfast", "lunch", "dinner"];
-              const aOrder = order.indexOf(a[0]);
-              const bOrder = order.indexOf(b[0]);
-              return aOrder - bOrder;
-            })
-            .map(([meal, recipeID], iii) => {
-              const title = expandedData[recipeID].title;
+      <div>
+        {selectedPlan ? (
+          <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
+            {Object.entries(selectedPlan)
+              .sort((a, b) => {
+                const order = ["breakfast", "lunch", "dinner"];
+                const aOrder = order.indexOf(a[0]);
+                const bOrder = order.indexOf(b[0]);
+                return aOrder - bOrder;
+              })
+              .map(([meal, recipeID], iii) => {
+                const title = expandedData[recipeID].title;
 
-              return (
-                <div key={iii}>
-                  <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
-                  <RemoveableRecipe
-                    title={title}
-                    to={`/recipe/${recipeID}`}
-                    id={recipeID}
-                    image={idToImage(recipeID)}
-                    onClick={() => removeFromPlanner(selectedDateAsKey, meal)}
-                  ></RemoveableRecipe>
-                </div>
-              );
-            })}
-        </div>
-      ) : (
-        <div className="w-full">
-          <p className="mx-auto mb-4 text-center text-xl font-bold uppercase text-dark-grey">
-            No recipes planned
-          </p>
-          <Link to="/allrecipes">
-            <Button
-              width="w-fit"
-              height="h-[50px]"
-              color="orange"
-              textColor="white"
-              text="View All Recipes"
-              extraCss="mx-auto mb-10"
-            ></Button>
-          </Link>
-        </div>
-      )}
-    </>
+                return (
+                  <div key={iii}>
+                    <p className="mb-2 text-xl font-bold uppercase">{meal}</p>
+                    <RemoveableRecipe
+                      title={title}
+                      to={`/recipe/${recipeID}`}
+                      id={recipeID}
+                      image={idToImage(recipeID)}
+                      onClick={() => removeFromPlanner(selectedDateAsKey, meal)}
+                    ></RemoveableRecipe>
+                  </div>
+                );
+              })}
+          </div>
+        ) : (
+          <div className="w-full">
+            <p className="mx-auto mb-4 text-center text-xl font-bold uppercase text-dark-grey">
+              No recipes planned
+            </p>
+            <Link to="/allrecipes">
+              <Button
+                width="w-fit"
+                height="h-[50px]"
+                color="orange"
+                textColor="white"
+                text="View All Recipes"
+                extraCss="mx-auto mb-10"
+              ></Button>
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -57,10 +57,10 @@ function ScrollableCalendar(props) {
 
   return (
     <div
-      className={`${props.screen === "recipe" ? "lg:w-[70%]" : props.screen === "plan" ? "" : "nothing"}`}
+      className={`${props.screen === "recipe" ? "lg:w-[70%]" : props.screen === "plan" ? "w-full max-w-[1000px]" : ""}`}
     >
       <div
-        className={`mb-8 flex items-center justify-center pt-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"}`}
+        className={`mb-8 flex items-center justify-center pt-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""}`}
       >
         <SvgArrowLeft
           onClick={() => {
@@ -102,7 +102,7 @@ function ScrollableCalendar(props) {
       </div>
       <div className={`${props.calendarMb} px-0`}>
         <div
-          className={`grid h-auto grid-cols-7 items-center justify-items-center ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"} ${props.weekBGColor} px-7`}
+          className={`grid h-auto grid-cols-7 items-center justify-items-center ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""} ${props.weekBGColor} px-7`}
         >
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
           <span className="row-span-1 mb-4 text-xl font-bold">M</span>
@@ -113,7 +113,7 @@ function ScrollableCalendar(props) {
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
         </div>
         <div
-          className={`grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center gap-y-8 bg-very-light-grey px-7 py-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"}`}
+          className={`grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center gap-y-8 bg-very-light-grey px-7 py-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""}`}
         >
           {Array.from(
             { length: getMonthInfo(todaysYear, todaysMonth).numDays },
