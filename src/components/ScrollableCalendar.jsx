@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 function ScrollableCalendar(props) {
   const { planner } = useContext(RecipeContext);
-
   const today = new Date();
   const months = [
     "January",
@@ -57,8 +56,12 @@ function ScrollableCalendar(props) {
   };
 
   return (
-    <>
-      <div className="mb-8 flex items-center justify-center pt-4">
+    <div
+      className={`${props.screen === "recipe" ? "lg:w-[70%]" : props.screen === "plan" ? "" : "nothing"}`}
+    >
+      <div
+        className={`mb-8 flex items-center justify-center pt-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"}`}
+      >
         <SvgArrowLeft
           onClick={() => {
             const date = new Date(
@@ -99,7 +102,7 @@ function ScrollableCalendar(props) {
       </div>
       <div className={`${props.calendarMb} px-0`}>
         <div
-          className={`grid h-auto grid-cols-7 grid-rows-[auto] items-center justify-items-center ${props.weekBGColor} px-7`}
+          className={`grid h-auto grid-cols-7 items-center justify-items-center ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"} ${props.weekBGColor} px-7`}
         >
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
           <span className="row-span-1 mb-4 text-xl font-bold">M</span>
@@ -109,7 +112,9 @@ function ScrollableCalendar(props) {
           <span className="row-span-1 mb-4 text-xl font-bold">F</span>
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
         </div>
-        <div className="grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center gap-y-8 bg-very-light-grey px-7 py-4">
+        <div
+          className={`grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center gap-y-8 bg-very-light-grey px-7 py-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : "nothing"}`}
+        >
           {Array.from(
             { length: getMonthInfo(todaysYear, todaysMonth).numDays },
             (_, i) => i + 1,
@@ -213,7 +218,7 @@ function ScrollableCalendar(props) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -222,5 +227,7 @@ ScrollableCalendar.propTypes = {
   calendarMb: PropTypes.string,
   selectedDate: PropTypes.object,
   setSelectedDate: PropTypes.func,
+  extraCss: PropTypes.string,
+  screen: PropTypes.string,
 };
 export default ScrollableCalendar;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function RecipePlan(props) {
   return (
     <div
-      className="flex max-h-[20rem] h-[15rem] w-[10rem] justify-between flex-col place-self-center justify-self-center"
+      className="flex h-[15rem] w-[10rem] flex-col justify-between place-self-center sm:h-[15rem] sm:w-[12rem] md:h-[18rem] md:w-[15rem]"
       style={props.cssObj ? props.cssObj : {}}
     >
       <div
@@ -22,7 +22,7 @@ function RecipePlan(props) {
           textColor="white"
           text={props.buttonText ? props.buttonText : "view recipe"}
           extraCss="mx-auto"
-          cssobj={{fontSize: ".85rem"}}
+          cssobj={{ fontSize: ".85rem" }}
           onClick={props.onClick ? props.onClick : null}
         ></Button>
       </Link>

@@ -31,16 +31,14 @@ function App() {
   // useData(true) = use fakeData (devlopment)
   // useData(false) = use realData (production)
   // useData(false, true) = throw an error
-  const { data, error, loading } = useData(true);
+  const { data, error, loading } = useData(false);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));
   };
 
   // favorite recipe stuff
-  const [favoriteRecipes, setFavoriteRecipes] = useState([
-    641908, 641111, 1096250,
-  ]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
       prevFavorites.filter((recipeID) => recipeID !== id),
