@@ -96,8 +96,6 @@ src/
 
 ## Preview
 
-## Preview
-
 <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
   <img src="./src/assets/screenshots/screenshot-2.png" alt="App Screenshot" width="250">
   <img src="./src/assets/screenshots/screenshot-3.png" alt="App Screenshot" width="250">
