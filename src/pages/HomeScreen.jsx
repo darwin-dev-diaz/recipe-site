@@ -17,9 +17,8 @@ import SvgTwitter from "../assets/icons/Twitter";
 import SvgSkillet from "../assets/icons/Skillet";
 
 function HomeScreen() {
-  const { latestRecipes, featuredRecipes, loading } = useContext(RecipeContext);
+  const { latestRecipes, featuredRecipes } = useContext(RecipeContext);
 
-  if (loading) return <Loading />;
   return (
     <div className="mx-auto flex max-w-[72rem] flex-col px-6">
       <div className="section mb-16">
