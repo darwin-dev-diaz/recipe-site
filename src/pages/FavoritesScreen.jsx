@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { idToImage } from "../util/idToImage";
 import Loading from "../components/primatives/Loading";
 import Error from "../components/primatives/Error";
+import OrangeHeader from "../components/OrangeHeader";
 
 function FavoritesScreen() {
   const { favoriteRecipes, expandedData, loading, error, removeFavorite } =
@@ -15,12 +16,7 @@ function FavoritesScreen() {
   return (
     <div className="flex w-full items-center justify-center px-6">
       <div className="max-w-[72rem]">
-        <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
-          <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-2xl font-extrabold uppercase text-white md:text-3xl">
-            Favorite Recipes
-          </h2>
-        </div>
-
+        <OrangeHeader text="favorite recipes" />
         <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-x-3 md:gap-y-20 lg:w-[70%]">
           {favoriteRecipes.length
             ? favoriteRecipes.map((recipeID, i) => {

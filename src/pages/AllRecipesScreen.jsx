@@ -10,6 +10,7 @@ import Button from "../components/primatives/Button";
 import AllRecipesRecipe from "../components/AllRecipesRecipe";
 
 import SvgFilterList from "../assets/icons/FilterList";
+import OrangeHeader from "../components/OrangeHeader";
 
 function AllRecipesScreen() {
   const { data, loading, error } = useContext(RecipeContext);
@@ -48,14 +49,11 @@ function AllRecipesScreen() {
 
   if (error) return <Error />;
   if (loading) return <Loading />;
+
   return (
     <div className="flex w-full items-center justify-center px-6">
       <div className="max-w-[72rem]">
-        <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
-          <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-2xl font-extrabold uppercase text-white md:text-3xl">
-            All Recipes
-          </h2>
-        </div>
+        <OrangeHeader text="all recipes" />
 
         <div className="mx-auto mb-6 flex w-full max-w-xs cursor-pointer flex-col items-center md:max-w-sm">
           <Button
@@ -92,7 +90,7 @@ function AllRecipesScreen() {
           ) : null}
         </div>
 
-        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-y-20 md:gap-x-3 lg:w-[70%]">
+        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-x-3 md:gap-y-20 lg:w-[70%]">
           {selectedData.map((recipe, i) => (
             <AllRecipesRecipe
               key={i}

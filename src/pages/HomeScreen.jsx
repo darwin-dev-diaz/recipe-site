@@ -6,6 +6,7 @@ import SvgAdd from "../assets/icons/Add";
 import RecipeDisplayOne from "../components/RecipeDisplayOne";
 import RecipeDisplayCircle from "../components/RecipeDisplayCircle";
 import RecipeDisplayTwo from "../components/RecipeDisplayTwo";
+import OrangeHeader from "../components/OrangeHeader";
 import Button from "../components/primatives/Button";
 import Loading from "../components/primatives/Loading";
 import image from "../assets/images/forward-arrow.jpg";
@@ -23,11 +24,7 @@ function HomeScreen() {
     <div className="mx-auto flex max-w-[72rem] flex-col px-6">
       <div className="section mb-16">
         <div className="relative mb-8 mt-10 flex flex-col items-center gap-4">
-          <div className="absolute left-[50%] z-40 flex h-12 w-full max-w-96 translate-x-[-50%] translate-y-[-50%] items-center bg-orange">
-            <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-xl font-extrabold uppercase text-white md:text-2xl lg:text-3xl">
-              Latest Recipes
-            </h2>
-          </div>
+          <OrangeHeader text="latest recipes" float={true}></OrangeHeader>
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
             {latestRecipes.map((recipe, i) => (
               <RecipeDisplayOne
