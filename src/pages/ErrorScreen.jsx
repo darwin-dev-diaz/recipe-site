@@ -6,39 +6,17 @@ function ErrorScreen() {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
       <Error cssobj={{ height: "25rem" }} />
-      <div
-        style={{
-          fontFamily: "Arial, sans-serif",
-          margin: "20px auto",
-          padding: "20px",
-          border: "1px solid #ff4d4d",
-          borderRadius: "10px",
-          backgroundColor: "#ffe6e6",
-          color: "#b30000",
-          maxWidth: "600px",
-        }}
-      >
-        <h1>Error</h1>
-        <p>
+      <div className="mt-6 w-full max-w-lg rounded-lg border border-red-400 bg-red-100 p-6 text-red-800">
+        <h1 className="mb-4 text-2xl font-bold">Error</h1>
+        <p className="mb-2 font-medium">
           <strong>Something went wrong:</strong>
         </p>
-        <pre
-          style={{
-            textAlign: "left",
-            backgroundColor: "#f9f9f9",
-            padding: "10px",
-            borderRadius: "5px",
-            overflowY: "auto", // Enable vertical scrolling
-            whiteSpace: "pre-wrap", // Wrap text to avoid horizontal scrolling
-            wordWrap: "break-word", // Ensure long words break correctly
-            fontSize: "14px",
-          }}
-        >
-          {`${location.state.status}: ${location.state.statusText}\n\n${location.state.data}`}
+        <pre className="overflow-y-auto whitespace-pre-wrap break-words rounded-lg bg-gray-200 p-4 text-left text-sm">
+          {`${location.state?.status}: ${location.state?.statusText}\n\n${location.state?.data}`}
         </pre>
-        <p>Please get good.</p>
+        <p className="mt-4">Please get good.</p>
       </div>
     </div>
   );

@@ -77,7 +77,7 @@ function MonthlyPlanScreen() {
       </h3>
       <div>
         {selectedPlan ? (
-          <div className="mb-14 flex w-full gap-4 overflow-x-auto px-2">
+          <div className="mb-14 flex w-screen gap-4 overflow-x-auto px-2">
             {Object.entries(selectedPlan)
               .sort((a, b) => {
                 const order = ["breakfast", "lunch", "dinner"];

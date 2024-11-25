@@ -20,16 +20,18 @@ function AllRecipesScreen() {
   const navigate = useNavigate();
 
   // make sure the category is valid. If not throw erre
-  if (!dishTypes.includes(category) && category) {
-    navigate("/error", {
-      replace: true,
-      state: {
-        statusText: `/allrecipes/${category} not found`,
-        status: 404,
-        data: "You are trying to filter by a category that doesn't exist",
-      },
-    });
-  }
+  useEffect(() => {
+    if (!dishTypes.includes(category) && category) {
+      navigate("/error", {
+        replace: true,
+        state: {
+          statusText: `/allrecipes/${category} not found`,
+          status: 404,
+          data: "You are trying to filter by a category that doesn't exist",
+        },
+      });
+    }
+  }, [category, navigate]);
 
   // if the parameter category is set, set the selected state right away
   useEffect(() => {
@@ -49,7 +51,6 @@ function AllRecipesScreen() {
   return (
     <div className="flex w-full items-center justify-center px-6">
       <div className="max-w-[72rem]">
-        
         <div className="z-40 mx-auto mb-6 mt-4 flex h-12 w-full max-w-96 items-center bg-orange">
           <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-2xl font-extrabold uppercase text-white md:text-3xl">
             All Recipes
@@ -91,7 +92,7 @@ function AllRecipesScreen() {
           ) : null}
         </div>
 
-        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-y-20 lg:w-[70%]">
+        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-y-20 md:gap-x-3 lg:w-[70%]">
           {selectedData.map((recipe, i) => (
             <AllRecipesRecipe
               key={i}

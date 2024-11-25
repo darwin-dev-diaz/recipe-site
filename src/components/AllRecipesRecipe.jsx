@@ -4,24 +4,25 @@ import { Link } from "react-router-dom";
 function AllRecipesRecipe(props) {
   return (
     <div
-      className="flex h-[28rem] max-h-[28rem] w-[13.5rem] flex-col justify-between place-self-center justify-self-center sm:h-[24rem] sm:w-[80%] md:h-[26rem]"
+      className="flex h-[20rem] max-h-[28rem] w-[100%] flex-col justify-between place-self-center justify-self-center sm:h-[24rem] sm:w-[80%] md:h-[26rem] md:w-full lg:w-full"
       style={props.cssObj ? props.cssObj : {}}
     >
       <div
         className="h-[21rem] w-full self-center bg-black bg-cover bg-center sm:h-[18rem] md:h-[20rem]"
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
-      <span className="my-3 text-center text-base font-extrabold uppercase sm:text-lg md:text-xl">
+      <p className="my-3 h-[25%] w-full truncate text-wrap text-center text-base font-extrabold uppercase sm:text-lg md:text-xl">
         {props.title}
-      </span>
+      </p>
       <Link to={props.to ? props.to : null}>
         <Button
           width="w-full"
-          height="h-[40px] sm:h-[45px] md:h-[50px]"
+          height="h-[45px] sm:h-[50px] md:h-[55px]"
           color={props.buttonColor ? props.buttonColor : "orange"}
           textColor="white"
           text={props.buttonText ? props.buttonText : "view recipe"}
-          extraCss="mx-auto"
+          extraCss="mx-auto text-[.8rem]"
+          cssobj={{ fontSize: "1rem" }}
           onClick={props.onClick ? props.onClick : null}
         ></Button>
       </Link>
