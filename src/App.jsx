@@ -38,7 +38,7 @@ function App() {
   };
 
   // favorite recipe stuff
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([641111,641111,641111,641111,641111,641111,641111,641111,641111,]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
       prevFavorites.filter((recipeID) => recipeID !== id),

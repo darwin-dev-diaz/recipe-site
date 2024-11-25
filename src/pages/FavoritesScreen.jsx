@@ -21,7 +21,7 @@ function FavoritesScreen() {
           </h2>
         </div>
 
-        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-y-20 lg:w-[70%]">
+        <div className="section mb-16 grid grid-cols-2 items-center justify-center gap-x-4 gap-y-3 justify-self-center sm:gap-x-0 md:grid-cols-3 md:gap-x-3 md:gap-y-20 lg:w-[70%]">
           {favoriteRecipes.length
             ? favoriteRecipes.map((recipeID, i) => {
                 const title = expandedData[recipeID].title;

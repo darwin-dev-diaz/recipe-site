@@ -43,7 +43,9 @@ function ScrollableCalendar(props) {
     selectedStylesItem: {
       borderRadius: "0.5rem",
       backgroundColor: "black",
-      padding: "1.5rem",
+      padding: "2rem 1rem 2rem 1rem",
+      // paddingBottom: "2rem",
+      // paddingTop: "2rem",
     },
     selectedStylesText: { color: "white" },
     selectedStylesDot: { backgroundColor: "white", color: "white" },
@@ -57,7 +59,7 @@ function ScrollableCalendar(props) {
 
   return (
     <div
-      className={`${props.screen === "recipe" ? "lg:w-[70%]" : props.screen === "plan" ? "w-full max-w-[1000px]" : ""}`}
+      className={`${props.screen === "recipe" ? "lg:w-[70%]" : props.screen === "plan" ? "w-full max-w-[62rem]" : ""}`}
     >
       <div
         className={`mb-8 flex items-center justify-center pt-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""}`}
@@ -79,7 +81,7 @@ function ScrollableCalendar(props) {
           className="h-10 w-10 cursor-pointer"
         ></SvgArrowLeft>
         <div className="z-40 mx-auto flex h-12 w-full max-w-96 items-center bg-orange">
-          <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-3xl font-extrabold uppercase text-white">
+          <h2 className="text-stroke-black text-stroke-2 stroke-text smooth-16 relative w-fit pl-3 text-xl font-extrabold uppercase text-white sm:text-3xl">
             {`${months[props.selectedDate.month - 1]}, ${props.selectedDate.year}`}
           </h2>
         </div>
@@ -100,7 +102,7 @@ function ScrollableCalendar(props) {
           className="h-10 w-10 cursor-pointer"
         ></SvgArrowRight>
       </div>
-      <div className={`${props.calendarMb} px-0`}>
+      <div className={` sm:${props.calendarMb} mb-5 px-0`}>
         <div
           className={`grid h-auto grid-cols-7 items-center justify-items-center ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""} ${props.weekBGColor} px-7`}
         >
@@ -113,7 +115,7 @@ function ScrollableCalendar(props) {
           <span className="row-span-1 mb-4 text-xl font-bold">S</span>
         </div>
         <div
-          className={`grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center gap-y-8 bg-very-light-grey px-7 py-4 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""}`}
+          className={`grid h-auto grid-cols-7 grid-rows-5 items-center justify-items-center bg-very-light-grey px-7 py-4 sm:gap-y-8 ${props.screen === "recipe" ? "lg:w-[90%]" : props.screen === "plan" ? "" : ""}`}
         >
           {Array.from(
             { length: getMonthInfo(todaysYear, todaysMonth).numDays },
@@ -189,7 +191,7 @@ function ScrollableCalendar(props) {
                 style={style}
               >
                 <span
-                  className="text-3xl font-bold"
+                  className="font-bold sm:text-3xl"
                   style={
                     i === props.selectedDate.day
                       ? styles.selectedStylesText
