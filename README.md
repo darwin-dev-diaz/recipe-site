@@ -71,7 +71,7 @@ src/
    ```bash
    npm run dev
    ```
-
+````
 ---
 
 ## How It Works
@@ -95,7 +95,11 @@ src/
 
 ## Preview
 
-[Insert relevant screenshots or GIFs showing the app functionality.]
+![App Screenshot](./src/assets/screenshots/screenshot-2.png "App Screenshot")
+![App Screenshot](./src/assets/screenshots/screenshot-3.png "App Screenshot")
+![App Screenshot](./src/assets/screenshots/screenshot-4.png "App Screenshot")
+![App Screenshot](./src/assets/screenshots/screenshot-5.png "App Screenshot")
+
 
 ---
 
@@ -109,7 +113,7 @@ src/
 
 ## Contributing
 
-Contributions are welcome! Feel free to fork this repository and submit a pull request. Follow the [contribution guidelines](CONTRIBUTING.md).
+Contributions are welcome! Feel free to fork this repository and submit a pull request.
 
 ---
 
