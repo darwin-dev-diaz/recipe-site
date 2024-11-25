@@ -214,7 +214,7 @@ function RecipeScreen() {
                       {`meal plan`}
                     </h2>
                   </div>
-                  <div className="PLANBOX flex w-auto justify-center gap-2 overflow-auto lg:h-[600px] lg:flex-col">
+                  <div className="PLANBOX flex w-auto sm:justify-center gap-2 overflow-auto lg:h-[600px] lg:flex-col">
                     {["breakfast", "lunch", "dinner"].map((meal, i) => {
                       const selectedPlanAsKey = getDayAsPlannerKey(
                         selectedDate.year,
@@ -227,9 +227,11 @@ function RecipeScreen() {
 
                       return (
                         <div key={i}>
-                          <div className="PLAN">
+                          <div
+                            className={`PLAN ${i === 0 ? " lg:pt-[30rem]" : ""} `}
+                          >
                             <p
-                              className={`${i === 0 ? "lg:pt-[30rem]" : ""} mb-2 pt-8 text-center text-xl font-bold uppercase`}
+                              className={`mb-2 pt-8 text-center text-xl font-bold uppercase `}
                             >
                               {meal}
                             </p>

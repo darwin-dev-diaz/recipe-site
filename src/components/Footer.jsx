@@ -49,7 +49,7 @@ function Footer() {
       <div className="flex flex-col items-center justify-center gap-4 px-6 py-8 sm:py-12">
         <button className="flex items-center gap-2 text-2xl font-semibold uppercase text-white sm:text-3xl">
           <SvgSkillet height="40" width="40" fill="white" />
-          Skillpot
+          hotpan
         </button>
         <p className="max-w-prose text-center text-base font-bold uppercase sm:text-lg lg:text-xl">
           Simple recipes that make you feel good
