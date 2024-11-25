@@ -2,7 +2,7 @@
 
 A React-based Recipe Planner application for food enthusiasts to explore recipes, plan meals, and manage their favorite dishes. The app integrates with the Spoonacular API to fetch recipe data, providing a smooth and feature-rich experience for users.
 
-![App Screenshot](./src/assests/screenshots/screenshot-1.png "App Screenshot")
+![App Screenshot](./src/assets/screenshots/screenshot-1.png "App Screenshot")
 
 ### Design Inspiration
 
