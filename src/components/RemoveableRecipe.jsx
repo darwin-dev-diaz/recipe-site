@@ -41,7 +41,7 @@ function RemoveableRecipe(props) {
 RemoveableRecipe.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.string,
   subtitle: PropTypes.string,
   to: PropTypes.string,
   removeFavorite: PropTypes.func,

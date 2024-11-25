@@ -31,14 +31,14 @@ function App() {
   // useData(true) = use fakeData (devlopment)
   // useData(false) = use realData (production)
   // useData(false, true) = throw an error
-  const { data, error, loading } = useData(true);
+  const { data, error, loading } = useData(false);
   const [expandedData, setExpandedData] = useState({});
   const addExpandedData = (id, data) => {
     setExpandedData((prev) => ({ ...prev, [id]: data }));
   };
 
   // favorite recipe stuff
-  const [favoriteRecipes, setFavoriteRecipes] = useState([641111,641111,641111,641111,641111,641111,641111,641111,641111,]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const removeFavorite = (id) => {
     setFavoriteRecipes((prevFavorites) =>
       prevFavorites.filter((recipeID) => recipeID !== id),
@@ -49,10 +49,7 @@ function App() {
   };
 
   // planner stuff
-  const [planner, setPlanner] = useState({
-    "1November2024": { lunch: 641908, breakfast: 641111, dinner: 1096250 },
-    "2November2024": { breakfast: 641111, lunch: 641908 },
-  });
+  const [planner, setPlanner] = useState({});
   const addToPlanner = (plannerID, meal, mealID) => {
     setPlanner((prevPlanner) => ({
       ...prevPlanner,
