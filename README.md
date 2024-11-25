@@ -72,6 +72,7 @@ src/
    npm run dev
    ```
 ````
+
 ---
 
 ## How It Works
@@ -95,11 +96,11 @@ src/
 
 ## Preview
 
-![App Screenshot](./src/assets/screenshots/screenshot-2.png "App Screenshot")
+<img src="./src/assets/screenshots/screenshot-2.png" alt="App Screenshot" width="400">
+
 ![App Screenshot](./src/assets/screenshots/screenshot-3.png "App Screenshot")
 ![App Screenshot](./src/assets/screenshots/screenshot-4.png "App Screenshot")
 ![App Screenshot](./src/assets/screenshots/screenshot-5.png "App Screenshot")
-
 
 ---
 
@@ -130,4 +131,4 @@ For questions or feedback, reach out via [darwin.diaz.ut@gmail.com](mailto:darwi
 ```
 
 
-````
+```
