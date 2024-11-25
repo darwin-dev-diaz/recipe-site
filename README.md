@@ -1,129 +1,126 @@
-# Recipe Site
+```markdown
+# HotPot : Recipe Planner App
 
-A dynamic and feature-rich recipe website built with React, React Router, and Tailwind CSS. This project provides users with a platform to explore recipes, create personalized meal plans, and save their favorite dishes. It incorporates a seamless UI with advanced state management using React Context.
+A React-based Recipe Planner application for food enthusiasts to explore recipes, plan meals, and manage their favorite dishes. The app integrates with the Spoonacular API to fetch recipe data, providing a smooth and feature-rich experience for users.
 
----
+![App Screenshot](./scr/assests/screenshots/screenshot-1.png "App Screenshot")
 
-## Table of Contents
+### Design Inspiration
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- [Pinch of Yum](https://pinchofyum.com/) - Beautifully crafted recipes and food photography.
+- [Budget Bytes](https://www.budgetbytes.com/) - Simple, affordable recipes with an easy-to-navigate design.
 
 ---
 
 ## Features
 
-- **Recipe Browsing:** Explore the latest and featured recipes.
-- **Favorites Management:** Add or remove recipes from your favorites list.
-- **Meal Planning:** Plan meals for specific dates with options for breakfast, lunch, and dinner.
-- **Responsive Design:** Fully responsive for desktop and mobile devices.
-- **Error Handling:** Custom error boundaries and error screens for robust navigation.
-- **API Integration:** Dynamically fetches data from a recipe API, with fallback to pre-filled data for development.
+- **Latest Recipes:** View the most recently added recipes with quick summaries.
+- **Recipe Categories:** Browse by categories like desserts, main courses, appetizers, and soups.
+- **Favorites:** Save your favorite recipes for quick access.
+- **Meal Planning:** Plan your meals with a calendar-based interface, allowing you to add recipes to specific days and meals.
+- **Detailed Recipe View:** Get complete information about a recipe, including nutritional values, ingredients, and preparation steps.
+- **Error Handling:** Comprehensive error screens to guide users when issues arise.
 
 ---
 
 ## Technologies Used
 
-- **Frontend:**
-  - React (with React Router for routing)
-  - Tailwind CSS (for styling)
-- **State Management:**
-  - React Context API
-- **Testing:**
-  - React Testing Library
-  - Vitest
-- **Utilities:**
-  - @svgr/cli for handling SVGs
-  - ESLint and Prettier for code linting and formatting
-- **Build Tool:**
-  - Vite (for fast development and production builds)
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (version 16 or higher)
-- npm (version 7 or higher)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/recipe-site.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd recipe-site
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-### Running the App
-
-To start the development server, run:
-```bash
-npm run dev
-```
-
-The application will be accessible at `http://localhost:5173`.
-
----
-
-## Available Scripts
-
-- **`npm run dev`**: Start the development server.
-- **`npm run build`**: Build the app for production.
-- **`npm run preview`**: Preview the production build locally.
-- **`npm run test`**: Run unit tests with Vitest.
-- **`npm run lint`**: Lint the codebase with ESLint.
+- **Frontend:** React, React Router, Tailwind CSS
+- **State Management:** React Context
+- **API:** Spoonacular Recipe API
+- **Tooling:** Vite for fast builds, ESLint for code linting
+- **Icons & SVGs:** Custom assets for UI components
 
 ---
 
 ## Project Structure
-
 ```
+
 src/
-├── assets/           # Static assets (e.g., images, icons)
-├── components/       # Reusable UI components
-├── data/             # Pre-filled data for development
-├── hooks/            # Custom React hooks
-├── pages/            # Page-level components
-├── util/             # Utility functions and helpers
-├── styles/           # Global styles and Tailwind configuration
-├── App.jsx           # Main application component
-├── routes.js         # Routing configuration
-└── index.css         # Tailwind base styles
-```
+├── assets/ # Images and icons
+├── components/ # Reusable components like buttons and headers
+├── data/ # Prefilled static data
+├── hooks/ # Custom hooks for managing data and state
+├── pages/ # Main screens/pages of the application
+├── util/ # Utility functions for various tasks
+├── App.jsx # Main App component
+├── routes.jsx # Route definitions
+└── index.jsx # Entry point for the React app
+
+````
 
 ---
 
-## Contributing
+## Installation
 
-Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request. Ensure that your code adheres to the project's linting and formatting rules.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-github-username/recipe-planner.git
+   cd recipe-planner
+````
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## License
+## How It Works
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+1. **API Integration:** The app makes multiple API calls to fetch data for different recipe categories (main courses, soups, etc.).
+2. **Data Management:** Data is cached and deduplicated to optimize performance.
+3. **Navigation:** React Router handles navigation between pages.
+4. **Customization:** The app allows dynamic sorting, filtering, and favoriting of recipes.
+
+---
+
+## Key Files
+
+- **`src/hooks/useData.jsx`:** Custom hook to fetch and manage recipe data.
+- **`src/pages/AllRecipesScreen.jsx`:** Displays all available recipes with sorting and filtering options.
+- **`src/util/apiKeyTester.js`:** Cycles through API keys to ensure valid requests.
+- **`src/util/fetchRecipeData.js`:** Fetches detailed data for individual recipes.
+- **`tailwind.config.js`:** Tailwind CSS configuration for custom styling.
+
+---
+
+## Preview
+
+[Insert relevant screenshots or GIFs showing the app functionality.]
 
 ---
 
 ## Future Enhancements
 
-- Add user authentication for personalized meal plans and favorites.
-- Include advanced search and filtering options.
-- Support recipe uploads from users.
+- **User Authentication:** Allow users to log in and save their plans across devices.
+- **Backend Integration:** Add a backend service for persistent storage.
+- **Notifications:** Notify users about meal plans or newly added recipes.
 
 ---
 
-Happy Cooking! 🥗🍲🍴
+## Contributing
+
+Contributions are welcome! Feel free to fork this repository and submit a pull request. Follow the [contribution guidelines](CONTRIBUTING.md).
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Contact
+
+For questions or feedback, reach out via [darwin.diaz.ut@gmail.com](mailto:darwin.diaz.ut@gmail.com).
+
+```
+
+```
