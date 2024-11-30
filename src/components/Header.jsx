@@ -55,7 +55,7 @@ function Header() {
     const r =
       !loading && search
         ? data.filter((recipe) =>
-            recipe.title.toLowerCase().trim().includes(search),
+            recipe.title.toLowerCase().trim().includes(search.toLowerCase()),
           )
         : null;
     if (r) setSearchResults(r);
